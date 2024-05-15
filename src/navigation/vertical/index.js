@@ -1,4 +1,4 @@
-import { File, Tag, FileText, BarChart, UserCheck, Table, Edit, UserMinus } from "react-feather";
+import { HardDrive, Tag } from "react-feather";
 
 export default [
   {
@@ -6,6 +6,12 @@ export default [
     title: "Trabajadores",
     icon: <Tag size={20} />,
     navLink: "/trabajador",
+  },
+  {
+    id: "Tipodoc",
+    title: "Tipo de Documento",
+    icon: <HardDrive size={20} />,
+    navLink: "/tipo-doc",
   }
 ];
 

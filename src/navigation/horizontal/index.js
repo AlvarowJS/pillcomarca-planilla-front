@@ -6,5 +6,11 @@ export default [
     title: "Trabajadores",
     icon: <Tag size={20} />,
     navLink: "/trabajador",
+  },
+  {
+    id: "Tipodoc",
+    title: "Tipo de Documento",
+    icon: <Tag size={20} />,
+    navLink: "/trabajador",
   }
 ];

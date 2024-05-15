@@ -15,6 +15,7 @@ import PublicRoute from "@components/routes/PublicRoute";
 import { isObjEmpty } from "@utils";
 import Trabajador from "../../views/trabajador/Trabajador";
 import bdMuni from "../../api/bdMuni";
+import TipoDoc from "../../views/tipoDoc/TipoDoc";
 
 
 // import OperacionesTrans from "../../views/operaciones/OperacionesTrans";
@@ -114,12 +115,15 @@ const Routes = [
     element: <AuthGuard><Trabajador /></AuthGuard>,
   },
   {
+    path: "/tipo-doc",
+    element: <AuthGuard><TipoDoc /></AuthGuard>,
+  },
+  {
     path: "/error",
     element: <Error />,
     meta: {
       layout: "blank",
     },
-
   },
 
 ];
