@@ -20,7 +20,7 @@ import {
 } from "reactstrap";
 
 // ** Illustrations Imports
-import logo from "@src/assets/images/logo/logo.png";
+import logo from "@src/assets/images/logo/logo_blanco.png";
 import illustrationsLight from "@src/assets/images/pages/login-v2.svg";
 import illustrationsDark from "@src/assets/images/pages/login-v2-dark.svg";
 
@@ -45,14 +45,12 @@ const Login = () => {
     try {
       const response = await bdMuni.post('/login', data);  // Reemplaza '/tu-ruta-api' con la ruta real de tu API      
       const res = response.data;      
-      localStorage.setItem('token', res?.api_token);
-      localStorage.setItem('rol', res?.rol);
-      localStorage.setItem('idu', res?.user);
-      localStorage.setItem('nombres', res?.nombres);
-      localStorage.setItem('apellidos', res?.apellidos);
-      localStorage.setItem('cargo', res?.cargo);
+      localStorage.setItem('token', res?.token);
+      localStorage.setItem('rol', res?.role_id);
+      localStorage.setItem('idu', res?.id_user);
+      localStorage.setItem('nombres', res?.name);
       setIsError(false)
-      navigate('/tickets')
+      navigate('/trabajador')
 
     }
     catch (err) {
@@ -60,8 +58,6 @@ const Login = () => {
       localStorage.setItem('rol', '');
       localStorage.setItem('idu', '');
       localStorage.setItem('nombres', '');
-      localStorage.setItem('apellidos', '');
-      localStorage.setItem('cargo', '');
       setIsError(true)
     }
   }
@@ -84,11 +80,11 @@ const Login = () => {
           lg="4"
           sm="12"
         >
-          <Col className="px-xl-2 mx-auto" sm="8" md="6" lg="12">
-            <img className="img_local" src={logo} alt="Logo" style={{ width: 100 }} />
+          <Col className="px-xl-2 mx-auto1" sm="8" md="6" lg="12">
+            <center><img className="img_local" src={logo} alt="Logo" /></center>
 
             <CardTitle tag="h2" className="fw-bold mb-1 mt-2">
-              Bienvenido al Intranet de la MDPM
+              Bienvenido al Sistema de Planillas de la MDPM
             </CardTitle>
             <CardText className="mb-2">
               Porfavor ingrese tu usuario y contraseña
@@ -109,7 +105,7 @@ const Login = () => {
                   name='email'
                   render={({ field }) => (
                     <Input
-                      placeholder='john@example.com'
+                      placeholder='Ingrese e-mail'
                       invalid={errors.email && true}
                       {...field}
                     />
@@ -130,6 +126,7 @@ const Login = () => {
                   name='password'
                   render={({ field }) => (
                     <Input
+                      placeholder="Ingrese su contraseña"
                       type="password"
                       invalid={errors.password && true}
                       {...field}

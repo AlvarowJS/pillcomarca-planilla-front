@@ -34,7 +34,7 @@ const Error = () => {
           </p>
           <Button
             tag={Link}
-            to="/tickets"
+            to="/trabajador"
             color="primary"
             className="btn-sm-block mb-2"
           >
