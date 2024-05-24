@@ -16,8 +16,10 @@ import { isObjEmpty } from "@utils";
 import Trabajador from "../../views/trabajador/Trabajador";
 import bdMuni from "../../api/bdMuni";
 import TipoDoc from "../../views/tipoDoc/TipoDoc";
-
-
+import TipoCont from "../../views/tipoCont/TipoCont";
+import DocIdentidad from "../../views/docIdent/DocIdent";
+import Contrato from "../../views/contrato/Contrato";
+import ConcFijo from "../../views/concepfijo/ConcFijo";
 // import OperacionesTrans from "../../views/operaciones/OperacionesTrans";
 
 const getLayout = {
@@ -117,6 +119,22 @@ const Routes = [
   {
     path: "/tipo-doc",
     element: <AuthGuard><TipoDoc /></AuthGuard>,
+  },
+  {
+    path: "/tipo-contrato",
+    element: <AuthGuard><TipoCont /></AuthGuard>,
+  },
+  {
+    path: "/documento-identidad",
+    element: <AuthGuard><DocIdentidad /></AuthGuard>
+  },
+  {
+    path: "/contrato",
+    element: <AuthGuard><Contrato /></AuthGuard>
+  },
+  {
+    path: "/concepto-fijo",
+    element: <AuthGuard><ConcFijo /></AuthGuard>
   },
   {
     path: "/error",
