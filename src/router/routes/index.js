@@ -17,7 +17,7 @@ import Trabajador from "../../views/trabajador/Trabajador";
 import bdMuni from "../../api/bdMuni";
 import TipoDoc from "../../views/tipoDoc/TipoDoc";
 import TipoCont from "../../views/tipoCont/TipoCont";
-import DocIdentidad from "../../views/docIdent/DocIdent";
+import AsigContConc from "../../views/contratoConcep/ContratoConcep";
 import Contrato from "../../views/contrato/Contrato";
 import ConcFijo from "../../views/concepfijo/ConcFijo";
 // import OperacionesTrans from "../../views/operaciones/OperacionesTrans";
@@ -125,8 +125,8 @@ const Routes = [
     element: <AuthGuard><TipoCont /></AuthGuard>,
   },
   {
-    path: "/documento-identidad",
-    element: <AuthGuard><DocIdentidad /></AuthGuard>
+    path: "/contrato-concepto",
+    element: <AuthGuard><AsigContConc /></AuthGuard>
   },
   {
     path: "/contrato",

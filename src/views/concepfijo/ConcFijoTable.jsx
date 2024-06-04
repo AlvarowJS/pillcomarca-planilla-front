@@ -20,11 +20,6 @@ const ConcFijoTable = ({ data, actualizarConceptoFijoId, eliminarConceptoFijo}) 
           selector: (row) => row?.porcentaje,
       },
       {
-        sortable: true,
-        name: "Pertenece a",
-        selector: (row) => row?.contrato.id,
-      },
-      {
           sortable:true,
           name: "Acciones",
           cell: (row) => {

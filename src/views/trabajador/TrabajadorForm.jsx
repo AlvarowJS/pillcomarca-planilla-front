@@ -17,6 +17,12 @@ const TrabajadorForm = ({
               <input 
                   className='form-control'
                   type='text'
+                  placeholder='Ingrese su Documento de identidad'
+                  {...register('numero_doumento')}
+              /><br />
+              <input 
+                  className='form-control'
+                  type='text'
                   placeholder='Ingrese sus Nombres'
                   {...register('nombre')}
               /><br />
@@ -66,7 +72,7 @@ const TrabajadorForm = ({
                   className='form-control'
                   type='text'
                   placeholder='Ingrese su Documento de Identidad'
-                  {...register('documento_identidad_id')}
+                  {...register('tipo_documento_identidad_id')}
               /><br />
 
             </div>

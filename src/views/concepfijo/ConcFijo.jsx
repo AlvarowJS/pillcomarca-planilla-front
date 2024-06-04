@@ -88,9 +88,9 @@ const ConcFijo = () => {
   const submit = (data) => {
     console.log(actualizacion, "???")
     if(actualizacion){
-      actualizarDNI(data.id, data)
+      actualizarConceptoFijoId(data.id, data)
     }else{
-      crearDocumentoIndent(data)
+      crearConceptoFijo(data)
     }
   }
   return (

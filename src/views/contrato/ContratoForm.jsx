@@ -64,7 +64,7 @@ const ContratoForm = ({
                             <label>Trabajador</label>
                             <select
                                 className='form-control'
-                                {...register('tipo_contrato_id')}
+                                {...register('trabajador_id')}
                             >
                                 <option value=''>Seleccione un Trabajador</option>
                                 {data && data.map((item) => (

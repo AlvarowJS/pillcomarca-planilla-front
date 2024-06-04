@@ -1,12 +1,31 @@
-import { HardDrive, Tag } from "react-feather";
+import { File, FileText, HardDrive, Paperclip, Tag, User } from "react-feather";
 
 export default [
   {
     id: "Trabajadores",
     title: "Trabajadores",
-    icon: <Tag size={20} />,
+    icon: <User size={20} />,
     navLink: "/trabajador",
   },
+    {
+    id: "Contrato",
+    title: "Contrato",
+    icon: <FileText size={20}/>,
+    navLink: "/contrato",
+  },   
+  {
+    id: "Concepto",
+    title: "Concepto Fijo",
+    icon: <File size={20}/>,
+    navLink: "/concepto-fijo",
+  },
+  {
+    id: "AsigContConc",
+    title: "Conceptos del Contrato",
+    icon: <Paperclip size={20}/>,
+    navLink: "/contrato-concepto",
+  },
+
   {
     id: "Tipodoc",
     title: "Tipo de Documento",
@@ -19,23 +38,7 @@ export default [
     icon: <Tag size={20} />,
     navLink: "/tipo-contrato",
   },
-  {
-    id: "DocIdentidad",
-    title: "Documento",
-    icon: <Tag size={20}/>,
-    navLink: "/documento-identidad",
-  },
-  {
-    id: "Contrato",
-    title: "Contrato",
-    icon: <Tag size={20}/>,
-    navLink: "/contrato",
-  },
-  {
-    id: "Concepto",
-    title: "Contrato Fijo",
-    icon: <Tag size={20}/>,
-    navLink: "/concepto-fijo",
-  }
+
+
 ];
 

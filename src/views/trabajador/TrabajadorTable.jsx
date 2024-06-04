@@ -12,6 +12,11 @@ const TrabajadorTable = ({ data, actualizarTrabajadorId, eliminarTrabajador}) =>
     },
     {
       sortable: true,
+      name: "numero de documento",
+      selector: (row) => row?.numero_doumento,
+    },
+    {
+      sortable: true,
       name: "nombres",
       selector: (row) => row?.nombre,
     },
@@ -48,7 +53,7 @@ const TrabajadorTable = ({ data, actualizarTrabajadorId, eliminarTrabajador}) =>
     {
       sortable: true,
       name: "documento de identidad",
-      selector: (row) => row?.documento_identidad_id,
+      selector: (row) => row?.tipo_documento_identidad.nombre_tipo_doc,
     },
     {
       sortable: true,
