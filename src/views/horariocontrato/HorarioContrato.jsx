@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import bdMuni from '../../api/bdMuni';
-import ContratoConcepTable from './ContratoConcepTable';
-import ContratoConcepForm from './ContratoConcepForm';
+import HorarioContratoTable from './HorarioContratoTable';
+import HorarioContratoForm from './HorarioContratoForm';
 
-const URL = "v1/contratoconcepto"
+const URL = "v1/horario-contrato"
 
-const ContratoConcep = () => {
+const HorarioContrato = () => {
+
   const [refresh, setRefresh] = useState(false)
   const [data, setData] = useState();
   const [modal, setModal] = useState(false);
@@ -15,7 +16,7 @@ const ContratoConcep = () => {
   const token = localStorage.getItem("token");
 
   const defaultValuesForm ={
-    contratoconcep:  "",
+    horario:  "",
   };
 
   const toggle = () => {
@@ -44,7 +45,7 @@ const ContratoConcep = () => {
     })
   }, [refresh]);
 
-  const crearContratoConcep = (data) => {
+  const crearHorarioContrato = (data) => {
     bdMuni
     .post(URL, data, getAuthheaders())
     .then((res) =>{
@@ -57,7 +58,7 @@ const ContratoConcep = () => {
     });
   }
 
-  const actualizarContratoConcep = (id, data) =>{
+  const actualizarHorarioContrato = (id, data) =>{
     bdMuni.put(`${URL}/${id}`, data, getAuthheaders())
     .then(res => {
         reset(defaultValuesForm)
@@ -66,7 +67,7 @@ const ContratoConcep = () => {
     })
   }
 
-  const eliminarContratoConcep = (id) =>{
+  const eliminarHorarioContrato = (id) =>{
     bdMuni.delete(`${URL}/${id}`, getAuthheaders())
     .then(res => {
       setRefresh(!refresh)
@@ -76,7 +77,7 @@ const ContratoConcep = () => {
     })
   }
   
-  const actualizarContratoConcepId = (id) =>{
+  const actualizarHorarioContratoId = (id) =>{
     toggle.call()
     setActualizacion(true)
     bdMuni.get(`${URL}/${id}`, getAuthheaders())
@@ -90,9 +91,9 @@ const ContratoConcep = () => {
 
   const submit = (data) => {
     if(actualizacion) {
-      actualizarContratoConcepId(data.id, data)
+      actualizarHorarioContratoId(data.id, data)
     }else{
-      crearContratoConcep(data)
+      crearHorarioContrato(data)
     }
   }
 
@@ -100,7 +101,7 @@ const ContratoConcep = () => {
     <>
 
       <button className='btn btn-primary' onClick={toggle}>+ Agregar</button>
-      <ContratoConcepForm
+      <HorarioContratoForm 
           toggle={toggle}
           modal={modal}
           handleSubmit={handleSubmit}
@@ -109,13 +110,13 @@ const ContratoConcep = () => {
           getAuthheaders={getAuthheaders}
           submit={submit}
       />
-      <ContratoConcepTable 
+      <HorarioContratoTable 
           data={data}
-          actualizarContratoConcepId={actualizarContratoConcepId}
-          eliminarContratoConcep={eliminarContratoConcep}
+          actualizarHorarioContratoId={actualizarHorarioContratoId}
+          eliminarHorarioContrato={eliminarHorarioContrato}
       />
     </>
   )
 }
 
-export default ContratoConcep
+export default HorarioContrato

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import bdMuni from '../../api/bdMuni';
-import ContratoConcepTable from './ContratoConcepTable';
-import ContratoConcepForm from './ContratoConcepForm';
+import HorarioForm from './HorarioForm';
+import HorarioTable from './HorarioTable';
 
-const URL = "v1/contratoconcepto"
+const URL = "v1/horario";
 
-const ContratoConcep = () => {
+const Horario = () => {
+
   const [refresh, setRefresh] = useState(false)
   const [data, setData] = useState();
   const [modal, setModal] = useState(false);
@@ -15,7 +16,7 @@ const ContratoConcep = () => {
   const token = localStorage.getItem("token");
 
   const defaultValuesForm ={
-    contratoconcep:  "",
+    horario:  "",
   };
 
   const toggle = () => {
@@ -31,8 +32,8 @@ const ContratoConcep = () => {
     headers: {
       Authorization: "Bearer " + token,
     },
-  }); 
-    
+  });
+  
   useEffect(() =>{
     bdMuni
     .get(URL, getAuthheaders())
@@ -43,8 +44,8 @@ const ContratoConcep = () => {
       console.log(err);
     })
   }, [refresh]);
-
-  const crearContratoConcep = (data) => {
+  
+  const crearHorario = (data) =>{
     bdMuni
     .post(URL, data, getAuthheaders())
     .then((res) =>{
@@ -55,18 +56,18 @@ const ContratoConcep = () => {
     .catch((err) => {
       console.log(err);
     });
-  }
-
-  const actualizarContratoConcep = (id, data) =>{
+  };
+  
+  const actualizarHorario = (id, data)=>{
     bdMuni.put(`${URL}/${id}`, data, getAuthheaders())
     .then(res => {
         reset(defaultValuesForm)
         setRefresh(!refresh)
         toggle.call()
     })
-  }
-
-  const eliminarContratoConcep = (id) =>{
+  };
+  
+  const eliminarHorario = (id) => {
     bdMuni.delete(`${URL}/${id}`, getAuthheaders())
     .then(res => {
       setRefresh(!refresh)
@@ -74,9 +75,9 @@ const ContratoConcep = () => {
     .catch(err =>{
       console.log(err)
     })
-  }
+  };
   
-  const actualizarContratoConcepId = (id) =>{
+  const actualizarHorarioId = (id) =>{
     toggle.call()
     setActualizacion(true)
     bdMuni.get(`${URL}/${id}`, getAuthheaders())
@@ -87,35 +88,34 @@ const ContratoConcep = () => {
           console.log(err)
       })
   }
-
+  
   const submit = (data) => {
     if(actualizacion) {
-      actualizarContratoConcepId(data.id, data)
+      actualizarHorario(data.id, data)
     }else{
-      crearContratoConcep(data)
+      crearHorario(data)
     }
   }
+    return (
+      <>
+          <button className='btn btn-primary' onClick={toggle}>+ Agregar</button>
+          <HorarioForm 
+              toggle={toggle}
+              modal={modal}
+              handleSubmit={handleSubmit}
+              register={register}
+              reset={reset}
+              getAuthheaders={getAuthheaders}
+              submit={submit}
+          />
+  
+          <HorarioTable 
+              data={data}
+              actualizarHorarioId={actualizarHorarioId}
+              eliminarHorario={eliminarHorario}
+          />
+      </>
+    );
+  };
 
-  return (
-    <>
-
-      <button className='btn btn-primary' onClick={toggle}>+ Agregar</button>
-      <ContratoConcepForm
-          toggle={toggle}
-          modal={modal}
-          handleSubmit={handleSubmit}
-          register={register}
-          reset={reset}
-          getAuthheaders={getAuthheaders}
-          submit={submit}
-      />
-      <ContratoConcepTable 
-          data={data}
-          actualizarContratoConcepId={actualizarContratoConcepId}
-          eliminarContratoConcep={eliminarContratoConcep}
-      />
-    </>
-  )
-}
-
-export default ContratoConcep
+export default Horario

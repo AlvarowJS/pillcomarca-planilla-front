@@ -33,13 +33,14 @@ const ConceptoFijoForm = ({toggle, modal, handleSubmit, register, reset, submit,
             <ModalBody>
                 <form onSubmit={handleSubmit(submit)}>
                     <div className='form-group'>
-                        
+                        <label>Ingrese un Concepto, ejm:"AFP", "CTS"</label>
                         <input
                             className='form-control'
                             type='text'
                             placeholder='Concepto'
                             {...register('nombre_concepto')}
                         /><br />
+                        <label>Ingrese el porcentada a Deducir</label>
                         <input
                             className='form-control'
                             type='text'

@@ -20,7 +20,7 @@ const TipoDocForm = ({
                         placeholder='Ingrese nombre del tipo de documentp'
                         {...register('nombre_tipo_doc')}
                     />                                        
-                </div>
+                </div><br />
                 <button className='btn btn-primary'>Guardar</button>
             </form>
         </ModalBody>

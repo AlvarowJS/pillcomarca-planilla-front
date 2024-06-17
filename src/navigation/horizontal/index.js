@@ -38,4 +38,48 @@ export default [
     icon: <Tag size={20} />,
     navLink: "/tipo-contrato",
   },
+  {
+    id: "Categoria",
+    title: "Categoria",
+    icon: <Tag size={20} />,
+    navLink: "/categoria",
+  },
+  {
+    id: "Horario",
+    title: "Horario",
+    icon: <Tag size={20} />,
+    navLink: "/horario",
+  },
+  {
+    id: "HorarioContrato",
+    title: "Horario de Trabajo",
+    icon: <Tag size={20} />,
+    navLink: "/horario-contrato",
+  },
+  {
+    id: "Universidad",
+    title: "Universidad",
+    icon: <Tag size={20} />,
+    navLink: "/universidad",
+  },
+  {
+    id: "Carrera",
+    title: "Carrera",
+    icon: <Tag size={20} />,
+    navLink: "/carrera",
+  },
+  {
+    id: "Practicante",
+    title: "Practicante",
+    icon: <Tag size={20} />,
+    navLink: "/practicante",
+  },
+  {
+    id: "Asistencia",
+    title: "Asistencia",
+    icon: <Tag size={20} />,
+    navLink: "/asistencia",
+  },
+  
+  
 ];

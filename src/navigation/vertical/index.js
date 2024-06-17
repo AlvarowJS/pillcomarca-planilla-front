@@ -1,4 +1,4 @@
-import { File, FileText, HardDrive, Paperclip, Tag, User } from "react-feather";
+import { Briefcase, Calendar, Clock, File, FileMinus, FileText, HardDrive, List, Paperclip, Tag, User, Users } from "react-feather";
 
 export default [
   {
@@ -35,10 +35,50 @@ export default [
   {
     id: "TipoCont",
     title: "Tipo de Contrato",
-    icon: <Tag size={20} />,
+    icon: <FileMinus size={20} />,
     navLink: "/tipo-contrato",
   },
-
-
+  {
+    id: "Categoria",
+    title: "Categoria Trabajador",
+    icon: <List size={20} />,
+    navLink: "/categoria",
+  },
+  {
+    id: "Horario",
+    title: "Horario",
+    icon: <Clock size={20} />,
+    navLink: "/horario",
+  },
+  {
+    id: "HorarioContrato",
+    title: "Horario de Trabajo",
+    icon: <Calendar size={20} />,
+    navLink: "/horario-contrato",
+  },
+  {
+    id: "Universidad",
+    title: "Universidad",
+    icon: <Briefcase size={20} />,
+    navLink: "/universidad",
+  },
+  {
+    id: "Carrera",
+    title: "Carrera",
+    icon: <List size={20} />,
+    navLink: "/carrera",
+  },
+  {
+    id: "Practicante",
+    title: "Practicante",
+    icon: <Users size={20} />,
+    navLink: "/practicante",
+  },
+  {
+    id: "Asistencia",
+    title: "Asistencia",
+    icon: <Tag size={20} />,
+    navLink: "/asistencia",
+  },
 ];
 

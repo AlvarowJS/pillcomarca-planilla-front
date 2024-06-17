@@ -20,6 +20,13 @@ import TipoCont from "../../views/tipoCont/TipoCont";
 import AsigContConc from "../../views/contratoConcep/ContratoConcep";
 import Contrato from "../../views/contrato/Contrato";
 import ConcFijo from "../../views/concepfijo/ConcFijo";
+import Categoria from "../../views/categoria/Categoria";
+import Horario from "../../views/horario/Horario";
+import HorarioContrato from "../../views/horariocontrato/HorarioContrato";
+import Universidad from "../../views/universidad/Universidad";
+import Carrera from "../../views/carrera/Carrera";
+import Practicante from "../../views/practicante/Practicante";
+import Asistencia from "../../views/asistencia/Asistencia";
 // import OperacionesTrans from "../../views/operaciones/OperacionesTrans";
 
 const getLayout = {
@@ -61,7 +68,7 @@ const AuthGuard = ({ children }) => {
           if (rol == "1") {
           } 
           else {
-            const restrictedRoutes = ["/horario"];
+            const restrictedRoutes = ["/"];
             if (restrictedRoutes.includes(window.location.pathname)) {
               navigate("/error");
             }
@@ -135,6 +142,33 @@ const Routes = [
   {
     path: "/concepto-fijo",
     element: <AuthGuard><ConcFijo /></AuthGuard>
+  },
+  {
+    path: "/categoria",
+    element: <AuthGuard><Categoria /></AuthGuard>
+  },
+  {
+    path: "/horario",
+    element: <AuthGuard><Horario /></AuthGuard>
+  },
+  {
+    path: "/horario-contrato",
+    element: <AuthGuard><HorarioContrato /></AuthGuard>
+  },
+  {
+    path: "/universidad",
+    element: <AuthGuard><Universidad /></AuthGuard>
+  },
+  {
+    path: "/carrera",
+    element: <AuthGuard><Carrera /></AuthGuard>
+  },
+  {
+    path: "/practicante",
+    element: <AuthGuard><Practicante /></AuthGuard>
+  },{
+    path: "/asistencia",
+    element: <AuthGuard><Asistencia /></AuthGuard>
   },
   {
     path: "/error",

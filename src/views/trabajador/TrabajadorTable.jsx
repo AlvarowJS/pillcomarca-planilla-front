@@ -7,52 +7,48 @@ const TrabajadorTable = ({ data, actualizarTrabajadorId, eliminarTrabajador}) =>
   const columns = [
     {
       sortable: true,
-      name: "id",
+      name: "Id",
       selector: (row) => row?.id,
     },
     {
       sortable: true,
-      name: "numero de documento",
+      name: "Numero de Documento",
       selector: (row) => row?.numero_doumento,
     },
     {
       sortable: true,
-      name: "nombres",
+      name: "Nombres",
       selector: (row) => row?.nombre,
     },
     {
       sortable: true,
-      name: "apellidos",
+      name: "Apellidos",
       selector: (row) => row?.apellido,
     },
     {
       sortable: true,
-      name: "email",
+      name: "Email",
       selector: (row) => row?.email,
     },
     {
       sortable: true,
-      name: "telefono",
+      name: "Telefono",
       selector: (row) => row?.telefono,
     },
+
     {
       sortable: true,
-      name: "sueldo base",
-      selector: (row) => row?.sueldo_base,
-    },
-    {
-      sortable: true,
-      name: "sexo",
+      name: "Sexo",
       selector: (row) => row?.sexo,
     },
     {
       sortable: true,
-      name: "fecha nacimiento",
+      name: "Fecha Nacimiento",
       selector: (row) => row?.fecha_nac,
     },
     {
       sortable: true,
-      name: "documento de identidad",
+      name: "Documento de Identidad",
       selector: (row) => row?.tipo_documento_identidad.nombre_tipo_doc,
     },
     {
