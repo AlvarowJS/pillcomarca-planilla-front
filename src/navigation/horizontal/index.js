@@ -7,6 +7,25 @@ export default [
     icon: <Tag size={20} />,
     navLink: "/trabajador",
   },
+
+  {
+    id: "Contrato",
+    title: "Contrato",
+    icon: <Tag size={20}/>,
+    navLink: "/contrato",
+  },  
+  {
+    id: "Concepto",
+    title: "Concepto Fijo",
+    icon: <Tag size={20}/>,
+    navLink: "/concepto-fijo",
+  },
+  {
+    id: "AsigContConc",
+    title: "Conceptos del Contrato",
+    icon: <Tag size={20}/>,
+    navLink: "/contrato-concepto",
+  },
   {
     id: "Tipodoc",
     title: "Tipo de Documento",
@@ -20,21 +39,47 @@ export default [
     navLink: "/tipo-contrato",
   },
   {
-    id: "DocIdentidad",
-    title: "Documento",
-    icon: <Tag size={20}/>,
-    navLink: "/documento-identidad",
+    id: "Categoria",
+    title: "Categoria",
+    icon: <Tag size={20} />,
+    navLink: "/categoria",
   },
   {
-    id: "Contrato",
-    title: "Contrato",
-    icon: <Tag size={20}/>,
-    navLink: "/contrato",
+    id: "Horario",
+    title: "Horario",
+    icon: <Tag size={20} />,
+    navLink: "/horario",
   },
   {
-    id: "Concepto",
-    title: "Contrato Fijo",
-    icon: <Tag size={20}/>,
-    navLink: "/concepto-fijo",
-  }
+    id: "HorarioContrato",
+    title: "Horario de Trabajo",
+    icon: <Tag size={20} />,
+    navLink: "/horario-contrato",
+  },
+  {
+    id: "Universidad",
+    title: "Universidad",
+    icon: <Tag size={20} />,
+    navLink: "/universidad",
+  },
+  {
+    id: "Carrera",
+    title: "Carrera",
+    icon: <Tag size={20} />,
+    navLink: "/carrera",
+  },
+  {
+    id: "Practicante",
+    title: "Practicante",
+    icon: <Tag size={20} />,
+    navLink: "/practicante",
+  },
+  {
+    id: "Asistencia",
+    title: "Asistencia",
+    icon: <Tag size={20} />,
+    navLink: "/asistencia",
+  },
+  
+  
 ];

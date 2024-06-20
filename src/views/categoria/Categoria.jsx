@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import bdMuni from '../../api/bdMuni';
-import ConceptoFijoForm from './ConceptoFijoForm';
-import ConcFijoTable from './ConcFijoTable';
+import CatgoriaForm from './CatgoriaForm';
+import CategoriaTable from './CategoriaTable';
 
+const URL = "v1/categoria";
 
-const URL = "v1/concepto-fijo";
-const ConcFijo = () => {
-  
+const categoria = () => {
+
   const [refresh, setRefresh] = useState(false)
   const [data, setData] = useState();
   const [modal, setModal] = useState(false);
   const [actualizacion, setActualizacion] = useState(false);
-  const { handleSubmit, register, reset } = useForm();
+  const { handleSubmit, register, reset} = useForm();
   const token = localStorage.getItem("token");
 
   const defaultValuesForm = {
-    conc_fijo: "",
+    categoria: "",
   };
 
   const toggle = () =>{
@@ -44,7 +44,7 @@ const ConcFijo = () => {
     })
   }, [refresh]);
 
-  const crearConceptoFijo = (data) =>{
+  const crearCategoria = (data) =>{
     console.log("?????")
     bdMuni
     .post(URL, data, getAuthheaders())
@@ -57,7 +57,7 @@ const ConcFijo = () => {
       console.log(err);
     })
   };
-  const actualizarConceptoFijo = (id,data) => {
+  const actualizarCategoria = (id,data) => {
     bdMuni.put(`${URL}/${id}`,data, getAuthheaders())
     .then(res =>{
       reset(defaultValuesForm)
@@ -65,8 +65,8 @@ const ConcFijo = () => {
       toggle.call()
     })
   };
-  const eliminarConceptoFijo = (id) => {
-    bdMuni.put(`${URL}/${id}`, getAuthheaders())
+  const eliminarCategoria = (id) => {
+    bdMuni.delete(`${URL}/${id}`, getAuthheaders())
     .then(res =>{
         setRefresh(!refresh)
     })
@@ -74,7 +74,7 @@ const ConcFijo = () => {
       console.log(err)
     })
   };
-  const actualizarConceptoFijoId = (id) => {
+  const actualizaCategoriaId = (id) => {
     toggle.call()
     setActualizacion(true)
     bdMuni.get(`${URL}/${id}`, getAuthheaders())
@@ -88,9 +88,9 @@ const ConcFijo = () => {
   const submit = (data) => {
     console.log(actualizacion, "???")
     if(actualizacion){
-      actualizarConceptoFijoId(data.id, data)
+      actualizaCategoriaId(data.id, data)
     }else{
-      crearConceptoFijo(data)
+      crearCategoria(data)
     }
   }
   return (
@@ -98,7 +98,7 @@ const ConcFijo = () => {
       <button className='btn btn-primary' onClick={toggle}>
         +Agregar
       </button>
-      <ConceptoFijoForm 
+      <CatgoriaForm 
           toggle={toggle}
           modal={modal}
           handleSubmit={handleSubmit}
@@ -107,12 +107,11 @@ const ConcFijo = () => {
          getAuthheades={getAuthheaders}
          submit={submit} 
       />
-      <ConcFijoTable 
+      <CategoriaTable 
       data={data}
-      actualizarConceptoFijoId={actualizarConceptoFijoId}
-      eliminarConceptoFijo={eliminarConceptoFijo}/>
+      actualizaCategoriaId={actualizaCategoriaId}
+      eliminarCategoria={eliminarCategoria}/>
     </>
   );
 };
-
-export default ConcFijo
+export default categoria

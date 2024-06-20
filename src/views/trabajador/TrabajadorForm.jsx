@@ -1,8 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Modal, ModalBody, ModalHeader } from 'reactstrap'
+import bdMuni from '../../api/bdMuni';
 
+const URL = "v1/tipo-documento-identidad";
 const TrabajadorForm = ({ 
-  toggle, modal, handleSubmit, register, reset, getAuthheaders, submit}) => {
+  toggle, modal, handleSubmit, register, reset, refresh, submit}) => {
+  
+  const [data,setData] = useState();
+  const token = localStorage.getItem("token");
+  const getAuthheaders = () => ({
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+  useEffect(() =>{
+    bdMuni
+    .get(URL, getAuthheaders())
+    .then((res) => {
+      setData(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }, [refresh])
+
   return (
     <Modal isOpen={modal} toggle={toggle}>
       <ModalHeader>
@@ -14,6 +35,26 @@ const TrabajadorForm = ({
               <label>
                 Trabajador
               </label>
+              <label>
+                Tipo de Documento  
+              </label>
+              <select 
+                  className='form-control'
+                  {...register('tipo_documento_identidad_id')}
+              >
+                <option value="">Selecciones el Tipo de Documento</option>
+                {data && data.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.nombre_tipo_doc}
+                  </option>
+                ))}
+              </select><br />
+              <input 
+                  className='form-control'
+                  type='text'
+                  placeholder='Ingrese su Documento de identidad'
+                  {...register('numero_doumento')}
+              /><br />
               <input 
                   className='form-control'
                   type='text'
@@ -38,12 +79,6 @@ const TrabajadorForm = ({
                   placeholder='Ingrese su Telefono'
                   {...register('telefono')}
               /><br />
-              <input 
-                  className='form-control'
-                  type='text'
-                  placeholder='Ingrese su Sueldo'
-                  {...register('sueldo_base')}
-              /><br />
               <select
                   className='form-control'
                   {...register('sexo')}
@@ -59,15 +94,9 @@ const TrabajadorForm = ({
               <input 
                   className='form-control'
                   type='date'
-                  placeholder='Ingrese su Fecha de Nacimiento'
                   {...register('fecha_nac')}
               /><br />
-              <input 
-                  className='form-control'
-                  type='text'
-                  placeholder='Ingrese su Documento de Identidad'
-                  {...register('documento_identidad_id')}
-              /><br />
+              
 
             </div>
             <button className='btn btn-primary'>Guardar</button>

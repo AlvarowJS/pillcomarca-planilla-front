@@ -33,29 +33,22 @@ const ConceptoFijoForm = ({toggle, modal, handleSubmit, register, reset, submit,
             <ModalBody>
                 <form onSubmit={handleSubmit(submit)}>
                     <div className='form-group'>
-                        <label>
-                            Documento de identidad
-                        </label>
-                        <select
-                            className='form-control'
-                            {...register('contrato_id')}
-                        >
-                            <option value=''>Seleccione El Contrato de</option>
-                            {data && data.map((item) =>(
-                                <option key={item.id} value={item.id}>
-                                    {item.trabajador.nombre}
-                                </option>
-                            ))}
-                        </select>
-                        <br />
+                        <label>Ingrese un Concepto, ejm:"AFP", "CTS"</label>
                         <input
                             className='form-control'
                             type='text'
-                            placeholder='nombre_concepto'
+                            placeholder='Concepto'
                             {...register('nombre_concepto')}
                         /><br />
+                        <label>Ingrese el porcentada a Deducir</label>
+                        <input
+                            className='form-control'
+                            type='text'
+                            placeholder='Porcentaje'
+                            {...register('porcentaje')}
+                        /><br />
                         
-                    </div>
+                    </div><br />
                     <button className='btn btn-primary'>Guardar</button>
                 </form>
             </ModalBody>
