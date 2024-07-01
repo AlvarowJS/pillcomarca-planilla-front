@@ -82,6 +82,17 @@ const ContratoConcepForm = ({ toggle, modal, handleSubmit, register, reset, subm
                             ))}
                         </select>
                     </div>
+                    <div>
+                        <label>
+                            Seleccione el Horario
+                        </label>
+                        <input 
+                        className='form-control'
+                        placeholder='Mes'
+                        type='text'
+                        {...register('mes')}
+                        />
+                    </div>
                 </div><br />
                 <button className='btn btn-primary'>Guardar</button>
             </form>

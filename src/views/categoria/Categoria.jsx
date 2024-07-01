@@ -88,7 +88,7 @@ const categoria = () => {
   const submit = (data) => {
     console.log(actualizacion, "???")
     if(actualizacion){
-      actualizaCategoriaId(data.id, data)
+      actualizarCategoria(data.id, data)
     }else{
       crearCategoria(data)
     }

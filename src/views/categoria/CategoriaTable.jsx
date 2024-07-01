@@ -2,7 +2,7 @@ import React from 'react'
 import DataTable from 'react-data-table-component';
 import { Edit, Trash } from 'react-feather'
 
-const CategoriaTable = ({ data, actualizarCategoriaId, eliminarCategoria}) => {
+const CategoriaTable = ({ data, actualizaCategoriaId, eliminarCategoria}) => {
 
   const columns = [
     {
@@ -29,7 +29,7 @@ const CategoriaTable = ({ data, actualizarCategoriaId, eliminarCategoria}) => {
                 
                     <button
                         className='btn btn-warning'
-                        onClick={() => actualizarCategoriaId(row?.id)}
+                        onClick={() => actualizaCategoriaId(row?.id)}
                     >
                         <Edit />
                     </button>

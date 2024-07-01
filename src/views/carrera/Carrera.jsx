@@ -88,7 +88,7 @@ const Carrera = () => {
 
   const submit = (data) => {
     if(actualizacion){
-      actualizarCarreraId(data.id, data)
+      actualizarCarrera(data.id, data)
     }else{
       crearCarrera(data)
     }

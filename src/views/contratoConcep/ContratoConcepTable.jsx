@@ -17,8 +17,13 @@ const ContratoConcepTable = ({ data, actualizarContratoConcepId, eliminarContrat
         },
         {
             sortable: true,
-            name: "Turno",
+            name: "Concepto",
             selector: (row => row?.concepto.nombre_concepto),
+        },
+        {
+            sortable: true,
+            name: "Tipo del Concepto",
+            selector: (row => row?.tipo),
         },
         {
             sortable: true,

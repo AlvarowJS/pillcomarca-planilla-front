@@ -66,7 +66,7 @@ const ConcFijo = () => {
     })
   };
   const eliminarConceptoFijo = (id) => {
-    bdMuni.put(`${URL}/${id}`, getAuthheaders())
+    bdMuni.delete(`${URL}/${id}`, getAuthheaders())
     .then(res =>{
         setRefresh(!refresh)
     })
@@ -88,7 +88,7 @@ const ConcFijo = () => {
   const submit = (data) => {
     console.log(actualizacion, "???")
     if(actualizacion){
-      actualizarConceptoFijoId(data.id, data)
+      actualizarConceptoFijo(data.id, data)
     }else{
       crearConceptoFijo(data)
     }
