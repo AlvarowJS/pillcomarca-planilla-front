@@ -4,6 +4,10 @@ import bdMuni from '../../api/bdMuni';
 import ContratoConcepTable from './ContratoConcepTable';
 import ContratoConcepForm from './ContratoConcepForm';
 
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import { Warning } from 'postcss';
+const MySwal = withReactContent(Swal);
 const URL = "v1/contratoconcepto"
 
 const ContratoConcep = () => {
@@ -51,9 +55,22 @@ const ContratoConcep = () => {
         toggle.call();
         reset(defaultValuesForm);
         setRefresh(!refresh)
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          timer: 1500,
+          title: 'Datos Guardados',
+          showConfirmButton: false
+        })
     })
     .catch((err) => {
-      console.log(err);
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        timer: 1500,
+        title: 'Contacte con soporte',
+        showConfirmButton: false
+      })
     });
   }
 
@@ -63,16 +80,61 @@ const ContratoConcep = () => {
         reset(defaultValuesForm)
         setRefresh(!refresh)
         toggle.call()
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          timer: 1500,
+          title: 'Datos Actualizados',
+          showConfirmButton: false
+        })
+    })
+    .catch((err) => {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        timer: 1500,
+        title: 'Conacte con Soporte',
+        showConfirmButton: false
+      })
     })
   }
 
   const eliminarContratoConcep = (id) =>{
-    bdMuni.delete(`${URL}/${id}`, getAuthheaders())
-    .then(res => {
-      setRefresh(!refresh)
-    })
-    .catch(err =>{
-      console.log(err)
+      return MySwal.fire({
+        title: '¿Estas seguro que quieres eliminar?',
+        text: '¡No podras revertir esto!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        customClass: {
+          confirmButton: 'btn btn-primary',
+          cancelButton: 'btn btn-onliner-danger ms-1'
+        },
+        buttonsStyling: false
+      }).then(function(result) {
+
+      if(result.value){
+      bdMuni.delete(`${URL}/${id}`, getAuthheaders())
+      .then(res => {
+        setRefresh(!refresh)
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Informacion Eliminada',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
+      .catch(err =>{
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          title: 'Contacte con Soporte',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
+      }
     })
   }
   
@@ -90,7 +152,7 @@ const ContratoConcep = () => {
 
   const submit = (data) => {
     if(actualizacion) {
-      actualizarContratoConcepId(data.id, data)
+      actualizarContratoConcep(data.id, data)
     }else{
       crearContratoConcep(data)
     }

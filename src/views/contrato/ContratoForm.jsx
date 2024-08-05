@@ -79,7 +79,7 @@ const ContratoForm = ({
                             </select>
                         </div><br />
                         <div className='form-group'>
-                            <label>Trabajador</label>
+                            <label>Categoria</label>
                             <select
                                 className='form-control'
                                 {...register('categoria_id')}

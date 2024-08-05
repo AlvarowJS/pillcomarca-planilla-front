@@ -5,20 +5,35 @@ import { Edit, Trash } from 'react-feather';
 const AsistenciaTable = ({ data, actualizarAsistenciaId, eliminarAsistencia }) => {
 
     const columns = [
-        {
+          {
             sortable: true,
             name: "ID",
-            selector: (row) => row?.id,
+            selector: (row) => row?.trabajador_id,
           },
           {
             sortable: true,
-            name: "Carrera",
-            selector: (row) => row?.nombre,
+            name: "Trabajador",
+            selector: (row) => row?.trabajador?.nombre,
           },
           {
             sortable: true,
-            name: "Descripcion",
-            selector: (row) => row?.descripcion,
+            name: "Fecha",
+            selector: (row) => {
+              const dateTime = row?.fecha; // Asumiendo que row.fecha tiene el formato "2024-08-01T00:00:00.000000Z"
+              const time = row?.hora;
+              const date = dateTime.split('T')[0]; // Obtiene la parte antes del "T"
+              return date+' '+time; // Solo devuelve la fecha en formato "YYYY-MM-DD"
+            },
+          },
+          {
+            sortable: true,
+            name: "Estado",
+            selector: (row) => row?.estado,
+          },
+          {
+            sortable: true,
+            name: "Tipo de Registro",
+            selector: (row) => row?.tipo_registro,
           },
           {
             sortable: true,

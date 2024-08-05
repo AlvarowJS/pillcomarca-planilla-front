@@ -4,7 +4,11 @@ import bdMuni from '../../api/bdMuni';
 import AsistenciaTable from './AsistenciaTable';
 import AsistenciaForm from './AsistenciaForm';
 
-const URL = "v1/asistencia";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
+
+const URL = "v1/asistencia-trabajador";
 
 const Asistencia = () => {
 
@@ -51,9 +55,22 @@ const Asistencia = () => {
         toggle.call();
         reset(defaultValuesForm);
         setRefresh(!refresh)
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Asistencia Creada',
+          showConfirmButton: false,
+          timer: 1500
+        })
     })
     .catch((err) => {
-      console.log(err);
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'No se pudo registrar',
+        showConfirmButton: false,
+        timer: 1500
+      });
     });
   };
 
