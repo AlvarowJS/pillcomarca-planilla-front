@@ -17,8 +17,28 @@ const ContratoConcepTable = ({ data, actualizarContratoConcepId, eliminarContrat
         },
         {
             sortable: true,
-            name: "Turno",
+            name: "Concepto",
             selector: (row => row?.concepto.nombre_concepto),
+        },
+        {
+            sortable: true,
+            name: "Meses Aplicables",
+            selector: (row => row?.mes?.nombre),
+        },
+        {
+            sortable: true,
+            name: "Valor",
+            selector: (row => row?.valor),
+        },
+        {
+            sortable: true,
+            name: "Tipo del Concepto",
+            selector: (row => {
+                if (row?.tipo === "1") return "Aportes";
+                if (row?.tipo === "2") return "Descuentos";
+                if (row?.tipo === "3") return "Aumentos";
+                return "Desconocido"; // Valor por defecto en caso de que no coincida con 1, 2, o 3
+            }),
         },
         {
             sortable: true,

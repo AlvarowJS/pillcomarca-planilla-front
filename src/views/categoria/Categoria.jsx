@@ -3,6 +3,9 @@ import { useForm } from 'react-hook-form';
 import bdMuni from '../../api/bdMuni';
 import CatgoriaForm from './CatgoriaForm';
 import CategoriaTable from './CategoriaTable';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+const MySwal = withReactContent(Swal);
 
 const URL = "v1/categoria";
 
@@ -52,9 +55,22 @@ const categoria = () => {
       toggle.call();
       reset(defaultValuesForm);
       setRefresh(!refresh)
+      Swal.fire({
+        icon: 'success',
+        timer: 1500,
+        title: 'Registro guardado con exito' ,
+        position: 'center',
+        showConfirmButton: false
+      })
     })
     .catch((err) => {
-      console.log(err);
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        timer: 1500,
+        title: 'Contacte con Soporte',
+        showConfirmButton: false
+      })
     })
   };
   const actualizarCategoria = (id,data) => {
@@ -63,17 +79,61 @@ const categoria = () => {
       reset(defaultValuesForm)
       setRefresh(!refresh)
       toggle.call()
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        timer: 1500,
+        title: 'Registro Actualizado con Exito',
+        showConfirmButton: false
+      })
+    })
+    .catch(err => {
+      Swal.fire({
+        position: 'center',
+        title: 'Contacte con Soporte',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1500
+      })
     })
   };
   const eliminarCategoria = (id) => {
-    bdMuni.delete(`${URL}/${id}`, getAuthheaders())
-    .then(res =>{
-        setRefresh(!refresh)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  };
+    return MySwal.fire({
+      title: '¿Estas seguro que quieres eliminar?',
+      text: '¡No podras revertir esto!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si',
+      customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-onliner-danger ms-1'
+      },
+      buttonsStyling: false
+      }).then(function(result){
+        if(result.value){
+        bdMuni.delete(`${URL}/${id}`, getAuthheaders())
+        .then(res =>{
+            setRefresh(!refresh)
+            Swal.fire({
+              icon: 'success',
+              timer: 1500,
+              title: 'Registro Eliminado con exito',
+              showConfirmButton: false,
+              position: 'center'
+            })
+        })
+        .catch(err => {
+          Swal.fire({
+            position: 'center',
+            title: 'Contacte con Soporte',
+            icon:'error',
+            timer: 1500,
+            showConfirmButton: false
+          })
+        })
+        }
+      }
+    )};
   const actualizaCategoriaId = (id) => {
     toggle.call()
     setActualizacion(true)
@@ -88,7 +148,7 @@ const categoria = () => {
   const submit = (data) => {
     console.log(actualizacion, "???")
     if(actualizacion){
-      actualizaCategoriaId(data.id, data)
+      actualizarCategoria(data.id, data)
     }else{
       crearCategoria(data)
     }

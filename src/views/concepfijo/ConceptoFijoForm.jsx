@@ -44,8 +44,14 @@ const ConceptoFijoForm = ({toggle, modal, handleSubmit, register, reset, submit,
                         <input
                             className='form-control'
                             type='text'
-                            placeholder='Porcentaje'
-                            {...register('porcentaje')}
+                            placeholder='Descripcion'
+                            {...register('descripcion')}
+                        /><br />
+                        <input
+                            className='form-control'
+                            type='text'
+                            placeholder='Valor'
+                            {...register('valor')}
                         /><br />
                         
                     </div><br />
