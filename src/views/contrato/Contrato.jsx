@@ -58,7 +58,8 @@ const Contrato = () => {
     bdMuni
       .get(URLTRABAJADOR, getAuthheaders())
       .then((res) => {
-        setDniData(res.data);
+        console.log(res.data.data,"asdasdasd");
+        setDniData(res.data.data);
       })
       .catch((err) => { })
   }, []);
@@ -196,6 +197,7 @@ const Contrato = () => {
         reset={reset}
         getAuthheaders={getAuthheaders}
         submit={submit}
+        dniData={dniData}
       />
 
       <ContratoTable

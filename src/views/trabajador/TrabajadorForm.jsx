@@ -85,7 +85,7 @@ const TrabajadorForm = ({
                   required
               >
                 <option value=''>Sexo</option>
-                <option value='Maculino'>Maculino</option>
+                <option value='Masculino'>Masculino</option>
                 <option value='Femenino'>Femenino</option>
               
               </select>

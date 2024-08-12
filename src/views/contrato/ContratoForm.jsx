@@ -3,18 +3,17 @@ import { Modal, ModalBody, ModalHeader } from 'reactstrap'
 import bdMuni from '../../api/bdMuni';
 
 const URL = "v1/tipo-contrato";
-const URL1 = "v1/trabajador";
+const URLTRABAJADOR = "v1/trabajador";
 const URL2 = "v1/categoria";
 
 const ContratoForm = ({
     toggle, modal, handleSubmit, register, reset, submit, refresh,
 }) => {
 
-    const [data,setData] = useState();
+    
     const [data1,setData1] = useState();
     const [data2,setData2] = useState();
-
-
+    const [dataTrabajador, setDataTrabajador] = useState()
     const token = localStorage.getItem("token");
     const getAuthheaders = () => ({
         headers: {
@@ -26,10 +25,10 @@ const ContratoForm = ({
             try{
                 const [res1, res, res2] = await Promise.all([
                     bdMuni.get(URL, getAuthheaders()),
-                    bdMuni.get(URL1, getAuthheaders()),
+                    bdMuni.get(URLTRABAJADOR, getAuthheaders()),
                     bdMuni.get(URL2, getAuthheaders()),
             ]);
-                setData(res.data);
+                setDataTrabajador(res.data.data);
                 setData1(res1.data);
                 setData2(res2.data);
             }catch(err){
@@ -71,7 +70,7 @@ const ContratoForm = ({
                                 {...register('trabajador_id')}
                             >
                                 <option value=''>Seleccione un Trabajador</option>
-                                {data && data.map((item) => (
+                                {dataTrabajador && dataTrabajador.map((item) => (
                                     <option key={item.id} value={item.id}>
                                         {item.nombre}
                                     </option>
