@@ -3,7 +3,7 @@ import bdMuni from '../../api/bdMuni';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 
 
-const URL = "v1/contrato";
+const URL = "v1/contratoSimple";
 const ConceptoFijoForm = ({toggle, modal, handleSubmit, register, reset, submit, refresh,
 }) => {
 

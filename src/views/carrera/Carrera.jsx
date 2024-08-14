@@ -110,7 +110,7 @@ const Carrera = () => {
         cancelButton: 'btn btn-onliner-danger ms-1'
       },buttonsStyling: false
     }).then(function(result){
-      if(result(value)){
+      if(result.value){
       bdMuni.delete(`${URL}/${id}`, getAuthheaders())
       .then(res => {
         setRefresh(!refresh)

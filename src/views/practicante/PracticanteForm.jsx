@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { Modal, ModalBody, ModalHeader } from 'reactstrap'
 import bdMuni from '../../api/bdMuni';
 
-const URL = 'v1/universidad';
-const URL1 = 'v1/carrera';
-const URL2 = 'v1/tipo-documento-identidad';
+const URLUNIVERSIDAD = 'v1/universidad';/* URL */
+const URLCARRERA = 'v1/carrera';/* URL1 */
+const URLTIPODOCUMENTO = 'v1/tipo-documento-identidad';/* URL2 */
 
 const PracticanteForm = ({toggle, modal, handleSubmit, register, reset, submit, refresh,
 }) => {
 
-    const[data,setData] = useState();
-    const[data1,setData1] = useState();
-    const[data2,setData2] = useState();
+    const [dataUniversidad, setDataUniversidad] = useState();/* data */
+    const [dataCarrea, setDataCarrea] = useState();/* data1 */
+    const [dataTipoDocuemnto, setDataTipoDocuemnto] = useState(); /* data2 */
 
     const token = localStorage.getItem("token");
     const getAuthheaders = () => ({
@@ -22,14 +22,14 @@ const PracticanteForm = ({toggle, modal, handleSubmit, register, reset, submit, 
     useEffect(() =>{
         const fetchData = async () => {
             try{
-                const [res1, res, res2] = await Promise.all([
-                    bdMuni.get(URL, getAuthheaders()),
-                    bdMuni.get(URL1, getAuthheaders()),
-                    bdMuni.get(URL2, getAuthheaders()),
+                const [resUniversidad, resCarrera, resTipoDocumento] = await Promise.all([
+                    bdMuni.get(URLUNIVERSIDAD, getAuthheaders()),
+                    bdMuni.get(URLCARRERA, getAuthheaders()),
+                    bdMuni.get(URLTIPODOCUMENTO, getAuthheaders()),
                 ]);
-                    setData(res.data);
-                    setData1(res1.data);
-                    setData2(res2.data);
+                    setDataUniversidad(resUniversidad.data);
+                    setDataCarrea(resCarrera.data);
+                    setDataTipoDocuemnto(resTipoDocumento.data);
             }catch(err){
                 console.log(err);
             }
@@ -55,7 +55,7 @@ const PracticanteForm = ({toggle, modal, handleSubmit, register, reset, submit, 
                                 {...register('tipo_documento_id')}
                             >
                                 <option value=''>Seleccione un Tipo de Documento</option>
-                                {data2 && data2.map((item) => (
+                                {dataTipoDocuemnto && dataTipoDocuemnto.map((item) => (
                                     <option key={item.id} value={item.id}>
                                         {item.nombre_tipo_doc}
                                     </option>
@@ -78,7 +78,7 @@ const PracticanteForm = ({toggle, modal, handleSubmit, register, reset, submit, 
                                 {...register('universidad_id')}
                             >
                                 <option value=''>Seleccione su Instituto o Universidad del Practicante</option>
-                                {data1 && data1.map((item) => (
+                                {dataUniversidad && dataUniversidad.map((item) => (
                                     <option key={item.id} value={item.id}>
                                         {item.nombre}
                                     </option>
@@ -92,7 +92,7 @@ const PracticanteForm = ({toggle, modal, handleSubmit, register, reset, submit, 
                                 {...register('carrera_id')}
                             >
                                 <option value=''>Seleccione la Carrera del Practicante</option>
-                                {data && data.map((item) => (
+                                {dataCarrea && dataCarrea.map((item) => (
                                     <option key={item.id} value={item.id}>
                                         {item.nombre}
                                     </option>

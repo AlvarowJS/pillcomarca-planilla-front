@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form';
-import bdMuni from '../../api/bdMuni';
-import ContratoForm from './ContratoForm';
-import ContratoTable from './ContratoTable';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import bdMuni from "../../api/bdMuni";
+import ContratoForm from "./ContratoForm";
+import ContratoTable from "./ContratoTable";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 import Select from "react-select";
 
@@ -14,8 +14,7 @@ const URL = "v1/contrato";
 const URLTRABAJADOR = "v1/trabajador";
 
 const Contrato = () => {
-
-  const [refresh, setRefresh] = useState(false)
+  const [refresh, setRefresh] = useState(false);
   const [data, setData] = useState();
   const [modal, setModal] = useState(false);
   const [actualizacion, setActualizacion] = useState(false);
@@ -31,11 +30,11 @@ const Contrato = () => {
   const toggle = () => {
     setActualizacion(false);
     setModal(!modal);
-  }
+  };
 
   const toggleActualizacion = () => {
     setActualizacion(true);
-  }
+  };
 
   const getAuthheaders = () => ({
     headers: {
@@ -51,16 +50,17 @@ const Contrato = () => {
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
   }, [refresh, dni]);
 
   useEffect(() => {
     bdMuni
       .get(URLTRABAJADOR, getAuthheaders())
       .then((res) => {
-        setDniData(res.data);
+        console.log(res.data.data, "asdasdasd");
+        setDniData(res.data.data);
       })
-      .catch((err) => { })
+      .catch((err) => {});
   }, []);
 
   const crearContrato = (data) => {
@@ -69,104 +69,110 @@ const Contrato = () => {
       .then((res) => {
         toggle.call();
         reset(defaultValuesForm);
-        setRefresh(!refresh)
+        setRefresh(!refresh);
         Swal.fire({
-          position: 'center',
-          icon: 'success',
+          position: "center",
+          icon: "success",
           timer: 1500,
-          title: 'Se Agrego Correctamente',
-          showConfirmButton: false
-        })
+          title: "Se Agrego Correctamente",
+          showConfirmButton: false,
+        });
       })
       .catch((err) => {
         Swal.fire({
-          position: 'center',
-          title: 'Contacte con el Soporte',
+          position: "center",
+          title: "Contacte con el Soporte",
           timer: 2000,
-          icon: 'error',
-          showConfirmButton: false
-        })
+          icon: "error",
+          showConfirmButton: false,
+        });
       });
   };
 
   const actualizarContrato = (id, data) => {
-    bdMuni.put(`${URL}/${id}`, data, getAuthheaders())
-      .then(res => {
-        reset(defaultValuesForm)
-        setRefresh(!refresh)
-        toggle.call()
+    bdMuni
+      .put(`${URL}/${id}`, data, getAuthheaders())
+      .then((res) => {
+        reset(defaultValuesForm);
+        setRefresh(!refresh);
+        toggle.call();
         Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Datos Actualizados Correctamente',
+          position: "center",
+          icon: "success",
+          title: "Datos Actualizados Correctamente",
           timer: 1500,
-          showConfirmButton: false
-        })
-      }).catch((err) => {
+          showConfirmButton: false,
+        });
+      })
+      .catch((err) => {
+        console.log(err, "error aqui");
         Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'Contacte con el Soporte',
+          position: "center",
+          icon: "error",
+          title: "Contacte con el Soporte",
           timer: 1500,
-          showConfirmButton: false
-        })
+          showConfirmButton: false,
+        });
       });
   };
   const eliminarContrato = (id) => {
     return MySwal.fire({
-      position: 'center',
-      icon: 'warning',
-      title: '¿Seguro que Desea Eliminar?',
-      text: '¡Esta accionn no se podra deshacer!',
+      position: "center",
+      icon: "warning",
+      title: "¿Seguro que Desea Eliminar?",
+      text: "¡Esta accionn no se podra deshacer!",
       showCancelButton: true,
-      confirmButtonText: 'Si',
+      confirmButtonText: "Si",
       customClass: {
-        confirmButton: 'btn btn-primary',
-        cancelButton: 'btn btn-onliner-danger ms-1'
-      }, buttonsStyling: false
+        confirmButton: "btn btn-primary",
+        cancelButton: "btn btn-onliner-danger ms-1",
+      },
+      buttonsStyling: false,
     }).then(function (result) {
-      bdMuni.delete(`${URL}/${id}`, getAuthheaders())
-        .then(res => {
-          setRefresh(!refresh)
+      bdMuni
+        .delete(`${URL}/${id}`, getAuthheaders())
+        .then((res) => {
+          setRefresh(!refresh);
           Swal.fire({
-            position: 'center',
-            title: 'Registro Eliminado Correctamente',
-            icon: 'success',
+            position: "center",
+            title: "Registro Eliminado Correctamente",
+            icon: "success",
             timer: 1500,
-            showConfirmButton: false
-          })
+            showConfirmButton: false,
+          });
         })
-        .catch(err => {
+        .catch((err) => {
           Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: 'Contacte con el Soporte',
+            position: "center",
+            icon: "error",
+            title: "Contacte con el Soporte",
             timer: 1500,
-            showConfirmButton: false
-          })
-        })
-    })
+            showConfirmButton: false,
+          });
+        });
+    });
   };
 
   const actualizarContratoId = (id) => {
-    toggle.call()
-    setActualizacion(true)
-    bdMuni.get(`${URL}/${id}`, getAuthheaders())
-      .then(res => {
-        reset(res.data)
+    toggle.call();
+    setActualizacion(true);
+    bdMuni
+      .get(`${URL}/${id}`, getAuthheaders())
+      .then((res) => {
+        reset(res.data);
       })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const submit = (data) => {
     if (actualizacion) {
-      actualizarContrato(data.id, data)
+      actualizarContrato(data.id, data);
     } else {
-      crearContrato(data)
+      crearContrato(data);
     }
-  }
+  };
 
   const handleChange = (selected) => {
     setDni(selected);
@@ -175,13 +181,15 @@ const Contrato = () => {
 
   const options = dniData?.map((option) => ({
     value: option?.numero_doumento,
-    label: option?.numero_doumento
-  }))
+    label: option?.numero_doumento,
+  }));
   return (
     <>
-      <button className='btn btn-primary' onClick={toggle}>+ Agregar</button>
+      <button className="btn btn-primary" onClick={toggle}>
+        + Agregar
+      </button>
       <Select
-        id='trabajador'
+        id="trabajador"
         value={dni}
         onChange={handleChange}
         options={options}
@@ -196,6 +204,7 @@ const Contrato = () => {
         reset={reset}
         getAuthheaders={getAuthheaders}
         submit={submit}
+        dniData={dniData}
       />
 
       <ContratoTable
@@ -207,5 +216,4 @@ const Contrato = () => {
   );
 };
 
-
-export default Contrato
+export default Contrato;
