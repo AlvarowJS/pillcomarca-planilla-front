@@ -4,6 +4,9 @@ import { Edit, Trash } from 'react-feather'
 
 const TrabajadorTable = ({ data, actualizarTrabajadorId, eliminarTrabajador, filter, search}) => {
   
+  const abrirCV = (cv) => {
+    window.open(`http://127.0.0.1:8000/storage/documento/${cv}`,'_blank')
+  }
   const columns = [
     {
       sortable: true,
@@ -50,6 +53,28 @@ const TrabajadorTable = ({ data, actualizarTrabajadorId, eliminarTrabajador, fil
       sortable: true,
       name: "Documento de Identidad",
       selector: (row) => row?.tipo_documento_identidad.nombre_tipo_doc,
+    },
+    {
+      sortable: true,
+      name: "Foto",
+      cell: (row) => {
+        return (
+          <>
+            <img src={`http://127.0.0.1:8000/storage/imagen/${row?.foto}`} width= '60px' height= '50px' />
+          </>
+        )
+      }
+    },
+    {
+      sortable: true,
+      name: "CV",
+      cell: (row) => {
+        return (
+          <>
+            <button className="btn btn-success" onClick={() => abrirCV(row?.hoja_vida)}>CV</button>
+          </>
+        )
+      }
     },
     {
       sortable: true,
