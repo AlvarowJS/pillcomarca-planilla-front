@@ -21,7 +21,8 @@ const Trabajador = () => {
   const token = localStorage.getItem("token");
   const [filter, setFilter] = useState();
   const [search, setSearch] = useState();
-
+  const [foto, setFoto] = useState();
+  const [hojaVida, setHojaVida] = useState();
   const defaultValuesForm = {
     datos_trabajador: "",
   };
@@ -55,8 +56,20 @@ const Trabajador = () => {
   }, [refresh]);
 
   const crearTrabajador = (data) => {
+    const datos = new FormData()
+    datos.append('numero_doumento', data.numero_doumento);
+    datos.append('nombre', data.nombre);
+    datos.append('apellido', data.apellido);
+    datos.append('email', data.email);
+    datos.append('telefono', data.telefono);
+    datos.append('sexo', data.sexo);
+    datos.append('fecha_nac', data.fecha_nac);
+    datos.append('tipo_documento_identidad_id', data.tipo_documento_identidad_id);
+    datos.append('foto', foto);
+    datos.append('hoja_vida', hojaVida);
+
     bdMuni
-      .post(URL, data, getAuthheaders())
+      .post(URL, datos, getAuthheaders())
       .then((res) => {
         toggle.call();
         reset(defaultValuesForm);
@@ -214,6 +227,8 @@ const Trabajador = () => {
         reset={reset}
         getAuthheaders={getAuthheaders}
         submit={submit}
+        setFoto={setFoto}
+        setHojaVida={setHojaVida}
       />
       <TrabajadorTable
         data={data}

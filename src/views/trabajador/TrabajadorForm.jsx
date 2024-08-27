@@ -4,7 +4,7 @@ import bdMuni from '../../api/bdMuni';
 
 const URL = "v1/tipo-documento-identidad";
 const TrabajadorForm = ({ 
-  toggle, modal, handleSubmit, register, reset, refresh, submit}) => {
+  toggle, modal, handleSubmit, register, reset, refresh, submit, setFoto, setHojaVida}) => {
   
   const [data,setData] = useState();
   const token = localStorage.getItem("token");
@@ -13,6 +13,14 @@ const TrabajadorForm = ({
       Authorization: "Bearer " + token,
     },
   });
+  const handleFotoChange = (event) => {
+    const fotografia = event.target.files[0]
+    setFoto(fotografia)
+  }
+  const handleHojaChange = (event) => {
+    const hoja = event.target.files[0]
+    setHojaVida(hoja)
+  }
   useEffect(() =>{
     bdMuni
     .get(URL, getAuthheaders())
@@ -95,6 +103,20 @@ const TrabajadorForm = ({
                   className='form-control'
                   type='date'
                   {...register('fecha_nac')}
+              /><br />
+              <label>Ingrese Foto del Trabajador</label>
+              <input 
+                  className='form-control'
+                  type='file'
+                  {...register('foto')}
+                  onChange={handleFotoChange}
+              /><br />
+              <label>Ingrese el Curriculum</label>
+              <input 
+                  className='form-control'
+                  type='file'
+                  {...register('hoja_vida')}
+                  onChange={handleHojaChange}
               /><br />
               
 

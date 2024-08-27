@@ -13,6 +13,7 @@ const ContratoConcepForm = ({
   reset,
   submit,
   refresh,
+  dataMeses
 }) => {
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
@@ -66,7 +67,7 @@ const ContratoConcepForm = ({
 
   const handleConceptChange = (event) => {
     const selectedId = event.target.value;
-    const selectedConcept = data1.find(
+    const selectedConcept = dataConcepto.find(
       (item) => item.id === parseInt(selectedId)
     );
     if (selectedConcept) {
@@ -148,9 +149,9 @@ const ContratoConcepForm = ({
                 <option value="">
                   Seleccione los meses en los que es aplicable
                 </option>
-                {meses.map((meses, index) => (
-                  <option key={index} value={index}>
-                    {meses}
+                {dataMeses && dataMeses.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.nombre}
                   </option>
                 ))}
               </select>

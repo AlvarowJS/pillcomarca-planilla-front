@@ -14,6 +14,7 @@ const ContratoForm = ({
   reset,
   submit,
   refresh,
+  setDocumento
 }) => {
   const [dataTrabajador, setDataTrabajador] = useState();
   const [dataCategoria, setDataCategoria] = useState();
@@ -24,6 +25,12 @@ const ContratoForm = ({
       Authorization: "Bearer " + token,
     },
   });
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setDocumento(file)
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -143,6 +150,15 @@ const ContratoForm = ({
               className="form-control"
               placeholder="Ingrese los términos del contrato"
               {...register("terminos_contrato")}
+            />
+          </div>
+          <br />
+          <div className="form-group">
+            <label>Archivo del Contrato</label>
+            <input
+              type="file" className="form-control" id="documento"
+              {...register("documento_c")}
+              onChange={handleFileChange}
             />
           </div>
           <br />
