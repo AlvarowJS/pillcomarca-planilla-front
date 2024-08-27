@@ -9,6 +9,7 @@ import withReactContent from "sweetalert2-react-content";
 import { Warning } from "postcss";
 const MySwal = withReactContent(Swal);
 const URL = "v1/contratoconcepto";
+const URLMESES = "v1/meses";
 
 const ContratoConcep = () => {
   const [refresh, setRefresh] = useState(false);
@@ -16,6 +17,7 @@ const ContratoConcep = () => {
   const [modal, setModal] = useState(false);
   const [actualizacion, setActualizacion] = useState(false);
   const { handleSubmit, register, reset } = useForm();
+  const [dataMeses, setDataMeses] = useState();
   const token = localStorage.getItem("token");
 
   const defaultValuesForm = {
@@ -47,6 +49,16 @@ const ContratoConcep = () => {
         console.log(err);
       });
   }, [refresh]);
+
+  useEffect(() => {
+    bdMuni
+      .get(URLMESES, getAuthheaders())
+      .then((res) => {
+        setDataMeses(res.data);
+      })
+      .catch((err) => {});
+  }, []);
+  
 
   const crearContratoConcep = (data) => {
     bdMuni
@@ -173,6 +185,7 @@ const ContratoConcep = () => {
         reset={reset}
         getAuthheaders={getAuthheaders}
         submit={submit}
+        dataMeses={dataMeses}
       />
       <ContratoConcepTable
         data={data}

@@ -21,6 +21,7 @@ const Contrato = () => {
   const [dni, setDni] = useState(false);
   const [dniData, setDniData] = useState();
   const { handleSubmit, register, reset } = useForm();
+  const [documento, setDocumento] = useState();
   const token = localStorage.getItem("token");
 
   const defaultValuesForm = {
@@ -64,8 +65,19 @@ const Contrato = () => {
   }, []);
 
   const crearContrato = (data) => {
+    const datos = new FormData()
+    datos.append('inicio_contrato', data.inicio_contrato);
+    datos.append('fin_contrato', data.fin_contrato);
+    datos.append('terminos_contrato', data.terminos_contrato);
+    datos.append('sueldo_contrato', data.sueldo_contrato);
+    datos.append('cargo_contrato', data.cargo_contrato);
+    datos.append('area_contrato', data.area_contrato);
+    datos.append('trabajador_id', data.trabajador_id);
+    datos.append('tipo_contrato_id', data.tipo_contrato_id);
+    datos.append('categoria_id', data.categoria_id);
+    datos.append('documento_c', documento);
     bdMuni
-      .post(URL, data, getAuthheaders())
+      .post(URL, datos, getAuthheaders())
       .then((res) => {
         toggle.call();
         reset(defaultValuesForm);
@@ -90,8 +102,19 @@ const Contrato = () => {
   };
 
   const actualizarContrato = (id, data) => {
+    const datos = new FormData()
+    datos.append('inicio_contrato', data.inicio_contrato);
+    datos.append('fin_contrato', data.fin_contrato);
+    datos.append('terminos_contrato', data.terminos_contrato);
+    datos.append('sueldo_contrato', data.sueldo_contrato);
+    datos.append('cargo_contrato', data.cargo_contrato);
+    datos.append('area_contrato', data.area_contrato);
+    datos.append('trabajador_id', data.trabajador_id);
+    datos.append('tipo_contrato_id', data.tipo_contrato_id);
+    datos.append('categoria_id', data.categoria_id);
+    datos.append('documento_c', documento);
     bdMuni
-      .put(`${URL}/${id}`, data, getAuthheaders())
+      .put(`${URL}/${id}`, datos, getAuthheaders())
       .then((res) => {
         reset(defaultValuesForm);
         setRefresh(!refresh);
@@ -181,21 +204,44 @@ const Contrato = () => {
 
   const options = dniData?.map((option) => ({
     value: option?.numero_doumento,
-    label: option?.numero_doumento,
+    label: option?.numero_doumento + ' ' + option.nombre + ' ' + option.apellido,
   }));
   return (
     <>
+      <div className="form-group mb-1">
       <button className="btn btn-primary" onClick={toggle}>
         + Agregar
       </button>
-      <Select
-        id="trabajador"
-        value={dni}
-        onChange={handleChange}
-        options={options}
-        isSearchable={true}
-        placeholder="No especifica"
-      />
+      </div>
+      <div className="form-group">
+        <label className="form-group">Seleccione o ingrese un Empleado</label>
+        <Select
+          id="trabajador"
+          value={dni}
+          onChange={handleChange}
+          options={options}
+          isSearchable={true}
+          placeholder="No especifica"
+          className="form-group"
+          styles={{
+            control: (base) => ({
+              ...base,
+              width: 800, // Ajusta el ancho del Select
+              fontSize: '14px', // Ajusta el tamaño de la fuente del Select
+            }),
+            menu: (base) => ({
+              ...base,
+              width: 800, // Asegura que el menú tenga el mismo ancho que el Select
+              fontSize: '14px', // Ajusta el tamaño de la fuente del menú de opciones
+            }),
+            option: (base) => ({
+              ...base,
+              fontSize: '14px', // Ajusta el tamaño de la fuente de las opciones
+              padding: '5px',   // Ajusta el padding de las opciones
+            }),
+          }}
+        />
+      </div>
       <ContratoForm
         toggle={toggle}
         modal={modal}
@@ -205,13 +251,15 @@ const Contrato = () => {
         getAuthheaders={getAuthheaders}
         submit={submit}
         dniData={dniData}
+        setDocumento={setDocumento}
       />
-
+      <div className="mt-4">
       <ContratoTable
         data={data}
         actualizarContratoId={actualizarContratoId}
         eliminarContrato={eliminarContrato}
       />
+      </div>
     </>
   );
 };
