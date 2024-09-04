@@ -8,7 +8,7 @@ const ConceptoFijoForm = ({toggle, modal, handleSubmit, register, reset, submit,
 }) => {
 
   const [data, setData] = useState();
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
   const getAuthheaders = () => ({
     headers: {
       Authorization: "Bearer " + token,
@@ -28,7 +28,7 @@ const ConceptoFijoForm = ({toggle, modal, handleSubmit, register, reset, submit,
   return (
     <Modal isOpen={modal} toggle={toggle}>
             <ModalHeader>
-                Registrar Docuemnto de Identidad
+                Registro de Conceptos Fijos
             </ModalHeader>
             <ModalBody>
                 <form onSubmit={handleSubmit(submit)}>

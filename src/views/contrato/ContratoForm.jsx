@@ -19,7 +19,7 @@ const ContratoForm = ({
   const [dataTrabajador, setDataTrabajador] = useState();
   const [dataCategoria, setDataCategoria] = useState();
   const [dataTipoContrato, setDataTipoContrato] = useState();
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
   const getAuthheaders = () => ({
     headers: {
       Authorization: "Bearer " + token,
@@ -54,7 +54,7 @@ const ContratoForm = ({
   }, [refresh, token]);
   return (
     <Modal isOpen={modal} toggle={toggle}>
-      <ModalHeader>Nuevo Contrato</ModalHeader>
+      <ModalHeader>Registro de Contratos</ModalHeader>
       <ModalBody>
         <form onSubmit={handleSubmit(submit)}>
           <div className="form-group">
@@ -94,26 +94,6 @@ const ContratoForm = ({
                   </option>
                 ))}
             </select>
-          </div>
-          <br />
-          <div className="form-group">
-            <label>Área</label>
-            <input
-              className="form-control"
-              type="text"
-              placeholder="Ingrese el área"
-              {...register("area_contrato")}
-            />
-          </div>
-          <br />
-          <div className="form-group">
-            <label>Cargo</label>
-            <input
-              className="form-control"
-              type="text"
-              placeholder="Ingrese el cargo"
-              {...register("cargo_contrato")}
-            />
           </div>
           <br />
           <div className="form-group">

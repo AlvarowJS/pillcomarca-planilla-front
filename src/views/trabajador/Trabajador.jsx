@@ -9,6 +9,8 @@ import { Col, Input, Label, Row } from "reactstrap";
 const MySwal = withReactContent(Swal);
 
 const URL = "v1/trabajador";
+const URLDEPENDENCIA = "v1/dependencia"
+const URLCARGO = "v1/cargo"
 const Trabajador = () => {
   const [total, setTotal] = useState();
   const [totalMujeres, setTotalMujeres] = useState();
@@ -18,11 +20,13 @@ const Trabajador = () => {
   const [modal, setModal] = useState(false);
   const [actualizacion, setActualizacion] = useState(false);
   const { handleSubmit, register, reset } = useForm();
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
   const [filter, setFilter] = useState();
   const [search, setSearch] = useState();
   const [foto, setFoto] = useState();
   const [hojaVida, setHojaVida] = useState();
+  const [cargo, setCargo] = useState();
+  const [dependencia, setDependencia] = useState();
   const defaultValuesForm = {
     datos_trabajador: "",
   };
@@ -55,6 +59,21 @@ const Trabajador = () => {
       });
   }, [refresh]);
 
+  useEffect(() => {
+    bdMuni
+    .get(URLDEPENDENCIA, getAuthheaders())
+    .then((res) => {
+      setDependencia(res.data);
+    })
+  }, []);
+  
+  useEffect(() => {
+    bdMuni
+      .get(URLCARGO, getAuthheaders())
+      .then((res) => {
+        setCargo(res.data);
+      })
+  }, []);
   const crearTrabajador = (data) => {
     const datos = new FormData()
     datos.append('numero_doumento', data.numero_doumento);
@@ -67,6 +86,8 @@ const Trabajador = () => {
     datos.append('tipo_documento_identidad_id', data.tipo_documento_identidad_id);
     datos.append('foto', foto);
     datos.append('hoja_vida', hojaVida);
+    datos.append('dependencia_id', data.dependencia_id);
+    datos.append('cargo_id', data.cargo_id);
 
     bdMuni
       .post(URL, datos, getAuthheaders())
@@ -229,6 +250,8 @@ const Trabajador = () => {
         submit={submit}
         setFoto={setFoto}
         setHojaVida={setHojaVida}
+        cargo={cargo}
+        dependencia={dependencia}
       />
       <TrabajadorTable
         data={data}

@@ -7,7 +7,7 @@ const UniversidadForm = ({
   return (
     <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader>
-            Nueva Universidad
+            Registro de Universidades
         </ModalHeader>
         <ModalBody>
             <form onSubmit={handleSubmit(submit)}>

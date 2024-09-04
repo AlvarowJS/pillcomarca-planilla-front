@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import bdMuni from '../../api/bdMuni';
-import HorarioContratoTable from './HorarioContratoTable';
-import HorarioContratoForm from './HorarioContratoForm';
+
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import DependenciaForm from './DependenciaForm';
+import DependenciaTable from './DependenciaTable';
 const MySwal = withReactContent(Swal);
 
-const URL = "v1/horario-contrato"
+const URL = "v1/dependencia"
 
-const HorarioContrato = () => {
-
+const Dependencia = () => {
   const [refresh, setRefresh] = useState(false)
   const [data, setData] = useState();
   const [modal, setModal] = useState(false);
@@ -18,15 +18,14 @@ const HorarioContrato = () => {
   const { handleSubmit, register, reset } = useForm();
   const token = localStorage.getItem("accessToken");
 
-  const defaultValuesForm ={
-    horario:  "",
+  const defaultValuesForm = {
+    dependencia: "",
   };
-
   const toggle = () => {
     setActualizacion(false);
     setModal(!modal);
   }
-
+  
   const toggleActualizacion = () =>{
     setActualizacion(true);
   }
@@ -35,8 +34,8 @@ const HorarioContrato = () => {
     headers: {
       Authorization: "Bearer " + token,
     },
-  }); 
-    
+  });
+  
   useEffect(() =>{
     bdMuni
     .get(URL, getAuthheaders())
@@ -47,8 +46,8 @@ const HorarioContrato = () => {
       console.log(err);
     })
   }, [refresh]);
-
-  const crearHorarioContrato = (data) => {
+  
+  const crearDependencia = (data) =>{
     bdMuni
     .post(URL, data, getAuthheaders())
     .then((res) =>{
@@ -58,9 +57,9 @@ const HorarioContrato = () => {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Registro Guardado Exitosamente',
-          timer: 1500,
-          showConfirmButton: false
+          title: 'CDependencia Ingresado Correctamente',
+          showConfirmButton: false,
+          timer: 1500
         })
     })
     .catch((err) => {
@@ -72,9 +71,9 @@ const HorarioContrato = () => {
         showConfirmButton: false
       })
     });
-  }
+  };
 
-  const actualizarHorarioContrato = (id, data) =>{
+  const actualizarDependencia = (id, data)=>{
     bdMuni.put(`${URL}/${id}`, data, getAuthheaders())
     .then(res => {
         reset(defaultValuesForm)
@@ -83,61 +82,60 @@ const HorarioContrato = () => {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Registro Actualizado Exitosamente',
+          title: 'Datos Actualizados Correctamente',
           timer: 1500,
           showConfirmButton: false
         })
-    }).catch(err => {
+    }).catch((err) => {
       Swal.fire({
         position: 'center',
         icon: 'error',
         title: 'Contacte con el Soporte',
         timer: 1500,
         showConfirmButton: false
-      })
     })
-  }
+    });
+  };
 
-  const eliminarHorarioContrato = (id) =>{
+  const eliminarDependencia = (id) => {
     return MySwal.fire({
-      title: '¿Estas seguro que quieres eliminar?',
-      text: '¡No podras revertir esto!',
+      position: 'center',
       icon: 'warning',
+      title: '¿Seguro que Desea Eliminar?',
+      text: '¡Esta accionn no se podra deshacer!',
       showCancelButton: true,
       confirmButtonText: 'Si',
       customClass: {
         confirmButton: 'btn btn-primary',
         cancelButton: 'btn btn-onliner-danger ms-1'
-      },
-      buttonsStyling: false
-    }).then(function(result) {
+      },buttonsStyling: false
+    }).then(function(result){
+      if(result.value){
+      bdMuni.delete(`${URL}/${id}`, getAuthheaders())
+      .then(res => {
+        setRefresh(!refresh)
+        Swal.fire({
+          position: 'center',
+          title: 'Registro Eliminado Correctamente',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        })
+      })
+      .catch(err =>{
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Contacte con el Soporte',
+          timer: 1500,
+          showConfirmButton: false
+        })
+      })
+      }
+    })
+  };
 
-    if(result.value){
-    bdMuni.delete(`${URL}/${id}`, getAuthheaders())
-    .then(res => {
-      setRefresh(!refresh)
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Registro Eliminado Exitosamente',
-        timer: 1500,
-        showConfirmButton: false
-      })
-    })
-    .catch(err =>{
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: 'Contacte con el Soporte',
-        timer: 1500,
-        showConfirmButton: false
-      })
-    })
-    }
-    })
-  }
-  
-  const actualizarHorarioContratoId = (id) =>{
+  const actualizarDependenciaId = (id) =>{
     toggle.call()
     setActualizacion(true)
     bdMuni.get(`${URL}/${id}`, getAuthheaders())
@@ -150,18 +148,16 @@ const HorarioContrato = () => {
   }
 
   const submit = (data) => {
-    if(actualizacion) {
-      actualizarHorarioContrato(data.id, data)
+    if(actualizacion){
+      actualizarDependencia(data.id, data)
     }else{
-      crearHorarioContrato(data)
+      crearDependencia(data)
     }
   }
-
   return (
     <>
-
-      <button className='btn btn-primary' onClick={toggle}>+ Agregar</button>
-      <HorarioContratoForm 
+        <button className='btn btn-primary' onClick={toggle}>+ Agregar</button>
+        <DependenciaForm
           toggle={toggle}
           modal={modal}
           handleSubmit={handleSubmit}
@@ -169,14 +165,15 @@ const HorarioContrato = () => {
           reset={reset}
           getAuthheaders={getAuthheaders}
           submit={submit}
-      />
-      <HorarioContratoTable 
-          data={data}
-          actualizarHorarioContratoId={actualizarHorarioContratoId}
-          eliminarHorarioContrato={eliminarHorarioContrato}
-      />
-    </>
-  )
-}
+        />
 
-export default HorarioContrato
+        <DependenciaTable 
+          data = {data}
+          actualizarDependenciaId = {actualizarDependenciaId}
+          eliminarDependencia = {eliminarDependencia}
+        />
+    </>
+  );
+};
+
+export default Dependencia

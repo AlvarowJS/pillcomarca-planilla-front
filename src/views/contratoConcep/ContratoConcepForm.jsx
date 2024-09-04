@@ -15,14 +15,12 @@ const ContratoConcepForm = ({
   refresh,
   dataMeses
 }) => {
-  const [data, setData] = useState([]);
-  const [data1, setData1] = useState([]);
   const [dataContrato, setDataContrato] = useState();
   const [dataConcepto, setDataConcepto] = useState();
   const [conceptValue, setConceptValue] = useState("");
   const [conceptPlaceholder, setConceptPlaceholder] = useState("");
 
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
   const getAuthheaders = () => ({
     headers: {
       Authorization: "Bearer " + token,
@@ -85,18 +83,18 @@ const ContratoConcepForm = ({
 
   return (
     <Modal isOpen={modal} toggle={toggle}>
-      <ModalHeader>Registrar Horario a cumplir por el trabajador</ModalHeader>
+      <ModalHeader>Registro de Conceptos del Contrato</ModalHeader>
       <ModalBody>
         <form onSubmit={handleSubmit(submit)}>
           <div className="form-group">
             <div>
-              <label>Seleccione el Trabajador al que asignara Horario</label>
+              <label>Seleccione el Contrato del Trabajador</label>
               <select className="form-control" {...register("idContrato")}>
                 <option value="">Seleccione un Trabajador</option>
                 {dataContrato &&
                   dataContrato.map((item) => (
                     <option key={item.id} value={item.id}>
-                      {item.trabajador.nombre}
+                      {item.trabajador.nombre} {item.trabajador.apellido} Contrato: {item.tipo_contrato.nombre_contrato}
                     </option>
                   ))}
               </select>

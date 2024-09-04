@@ -6,7 +6,7 @@ const TipoDocForm = ({
   return (
     <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader>
-            Registrar Tipo de Documento
+            Registro de Tipo de Documento
         </ModalHeader>
         <ModalBody>
             <form onSubmit={handleSubmit(submit)}>

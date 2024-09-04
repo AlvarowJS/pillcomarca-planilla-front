@@ -12,7 +12,7 @@ const CarreraForm = ({
 }) => {
   return (
     <Modal isOpen={modal} toggle={toggle}>
-      <ModalHeader>Nueva Universidad</ModalHeader>
+      <ModalHeader>Registro de Carrera</ModalHeader>
       <ModalBody>
         <form onSubmit={handleSubmit(submit)}>
           <div className="form-group">
@@ -21,7 +21,7 @@ const CarreraForm = ({
               <input
                 className="form-control"
                 type="text"
-                placeholder="Ingrese el nombre de la carrera"
+                placeholder="Ingrese el nombre de la Carrera"
                 {...register("nombre")}
               />
             </div>

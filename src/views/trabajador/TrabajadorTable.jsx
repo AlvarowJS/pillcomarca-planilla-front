@@ -30,6 +30,11 @@ const TrabajadorTable = ({ data, actualizarTrabajadorId, eliminarTrabajador, fil
     },
     {
       sortable: true,
+      name: "Dependencia",
+      selector: (row) => row?.dependencia?.nombre,
+    },
+    {
+      sortable: true,
       name: "Email",
       selector: (row) => row?.email,
     },

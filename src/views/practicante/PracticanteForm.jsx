@@ -13,7 +13,7 @@ const PracticanteForm = ({toggle, modal, handleSubmit, register, reset, submit, 
     const [dataCarrea, setDataCarrea] = useState();/* data1 */
     const [dataTipoDocuemnto, setDataTipoDocuemnto] = useState(); /* data2 */
 
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     const getAuthheaders = () => ({
         headers: {
             Authorization: "Bearer " + token,
@@ -43,7 +43,7 @@ const PracticanteForm = ({toggle, modal, handleSubmit, register, reset, submit, 
   return (
     <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader>
-            Nueva Universidad
+            Registro de Practicantes
         </ModalHeader>
         <ModalBody>
             <form onSubmit={handleSubmit(submit)}>

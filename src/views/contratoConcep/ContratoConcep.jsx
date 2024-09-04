@@ -18,7 +18,7 @@ const ContratoConcep = () => {
   const [actualizacion, setActualizacion] = useState(false);
   const { handleSubmit, register, reset } = useForm();
   const [dataMeses, setDataMeses] = useState();
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
 
   const defaultValuesForm = {
     contratoconcep: "",

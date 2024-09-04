@@ -33,7 +33,7 @@ const ResetPassword = lazy(() => import('../views/authentication/ResetPassword')
 const Router = () => {
   // const [token, setToken] = useState()
   // useEffect(() => {
-  //   const getToken = localStorage.getItem("token")
+  //   const getToken = localStorage.getItem("accessToken")
   //   setToken(getToken)
     
   // }, [])

@@ -27,6 +27,8 @@ import Universidad from "../../views/universidad/Universidad";
 import Carrera from "../../views/carrera/Carrera";
 import Practicante from "../../views/practicante/Practicante";
 import Asistencia from "../../views/asistencia/Asistencia";
+import Dependencia from "../../views/dependencia/Dependencia";
+import Cargo  from "../../views/cargo/Cargo";
 // import OperacionesTrans from "../../views/operaciones/OperacionesTrans";
 
 const getLayout = {
@@ -48,7 +50,7 @@ const AuthGuard = ({ children }) => {
   const [myRol, setMyRol] = useState()
   const navigate = useNavigate();
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     const objToken = { token: token }
 
     bdMuni.post('/token-auth', objToken, {
@@ -83,7 +85,7 @@ const AuthGuard = ({ children }) => {
 
 
   // useEffect(() => {
-  //   const token = localStorage.getItem("token");
+  //   const token = localStorage.getItem("accessToken");
   //   const rol = localStorage.getItem("rol");
 
   //   console.log(myRol, "234234")
@@ -123,18 +125,12 @@ const Routes = [
     path: "/trabajador",
     element: <AuthGuard><Trabajador /></AuthGuard>,
   },
+  
   {
-    path: "/tipo-doc",
-    element: <AuthGuard><TipoDoc /></AuthGuard>,
-  },
-  {
-    path: "/tipo-contrato",
+    path: "/configuracion/tipo-contrato",
     element: <AuthGuard><TipoCont /></AuthGuard>,
   },
-  {
-    path: "/contrato-concepto",
-    element: <AuthGuard><AsigContConc /></AuthGuard>
-  },
+  
   {
     path: "/contrato",
     element: <AuthGuard><Contrato /></AuthGuard>
@@ -144,24 +140,8 @@ const Routes = [
     element: <AuthGuard><ConcFijo /></AuthGuard>
   },
   {
-    path: "/categoria",
-    element: <AuthGuard><Categoria /></AuthGuard>
-  },
-  {
     path: "/horario",
     element: <AuthGuard><Horario /></AuthGuard>
-  },
-  {
-    path: "/horario-contrato",
-    element: <AuthGuard><HorarioContrato /></AuthGuard>
-  },
-  {
-    path: "/universidad",
-    element: <AuthGuard><Universidad /></AuthGuard>
-  },
-  {
-    path: "/carrera",
-    element: <AuthGuard><Carrera /></AuthGuard>
   },
   {
     path: "/practicante",
@@ -169,6 +149,39 @@ const Routes = [
   },{
     path: "/asistencia",
     element: <AuthGuard><Asistencia /></AuthGuard>
+  },
+  //Configuracion
+  {
+    path: "/configuracion/cargo",
+    element: <AuthGuard><Cargo /></AuthGuard>
+  }, 
+  {
+    path: "/configuracion/contrato-concepto",
+    element: <AuthGuard><AsigContConc /></AuthGuard>
+  },
+  {
+    path: "/configuracion/tipo-doc",
+    element: <AuthGuard><TipoDoc /></AuthGuard>,
+  }, 
+  {
+    path: "/configuracion/dependencia",
+    element: <AuthGuard><Dependencia /></AuthGuard>
+  },
+  {
+    path: "/configuracion/categoria",
+    element: <AuthGuard><Categoria /></AuthGuard>
+  },
+  {
+    path: "/configuracion/horario-contrato",
+    element: <AuthGuard><HorarioContrato /></AuthGuard>
+  },
+  {
+    path: "/configuracion/universidad",
+    element: <AuthGuard><Universidad /></AuthGuard>
+  },
+  {
+    path: "/configuracion/carrera",
+    element: <AuthGuard><Carrera /></AuthGuard>
   },
   {
     path: "/error",

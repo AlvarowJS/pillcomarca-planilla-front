@@ -22,7 +22,7 @@ const Contrato = () => {
   const [dniData, setDniData] = useState();
   const { handleSubmit, register, reset } = useForm();
   const [documento, setDocumento] = useState();
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
 
   const defaultValuesForm = {
     contrato: "",
@@ -44,6 +44,7 @@ const Contrato = () => {
   });
 
   useEffect(() => {
+    if(dni.value){
     bdMuni
       .get(`${URL}?dni=${dni.value}`, getAuthheaders())
       .then((res) => {
@@ -52,6 +53,7 @@ const Contrato = () => {
       .catch((err) => {
         console.log(err);
       });
+    }
   }, [refresh, dni]);
 
   useEffect(() => {
@@ -70,8 +72,6 @@ const Contrato = () => {
     datos.append('fin_contrato', data.fin_contrato);
     datos.append('terminos_contrato', data.terminos_contrato);
     datos.append('sueldo_contrato', data.sueldo_contrato);
-    datos.append('cargo_contrato', data.cargo_contrato);
-    datos.append('area_contrato', data.area_contrato);
     datos.append('trabajador_id', data.trabajador_id);
     datos.append('tipo_contrato_id', data.tipo_contrato_id);
     datos.append('categoria_id', data.categoria_id);
@@ -107,8 +107,6 @@ const Contrato = () => {
     datos.append('fin_contrato', data.fin_contrato);
     datos.append('terminos_contrato', data.terminos_contrato);
     datos.append('sueldo_contrato', data.sueldo_contrato);
-    datos.append('cargo_contrato', data.cargo_contrato);
-    datos.append('area_contrato', data.area_contrato);
     datos.append('trabajador_id', data.trabajador_id);
     datos.append('tipo_contrato_id', data.tipo_contrato_id);
     datos.append('categoria_id', data.categoria_id);

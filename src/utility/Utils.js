@@ -56,7 +56,7 @@ export const formatDateToMonthShort = (value, toTimeForCurrentDay = true) => {
  */
 export const isUserLoggedIn = () => localStorage.getItem("userData");
 export const getUserData = () => JSON.parse(localStorage.getItem("userData"));
-export const getkey = () => localStorage.getItem("token");
+export const getkey = () => localStorage.getItem("accessToken");
 
 
 /**
@@ -68,7 +68,7 @@ export const getkey = () => localStorage.getItem("token");
  * @param {String} userRole Role of user
  */
 export const getHomeRouteForLoggedInUser = (user) => {
-  let key = localStorage.getItem("token")
+  let key = localStorage.getItem("accessToken")
   if (key){    
     return DefaultRoute
   };

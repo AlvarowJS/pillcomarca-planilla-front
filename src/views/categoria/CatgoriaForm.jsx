@@ -6,7 +6,7 @@ const CatgoriaForm = ({toggle, modal, handleSubmit, register, reset, submit, ref
     return (
     <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader>
-            Registrar Categoria de Trabajadaores
+            Registro de Categorias para Empleados
         </ModalHeader>
         <ModalBody>
             <form onSubmit={handleSubmit(submit)}>
