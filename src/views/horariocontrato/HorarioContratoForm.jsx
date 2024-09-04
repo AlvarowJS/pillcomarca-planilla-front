@@ -17,7 +17,7 @@ const HorarioContratoForm = ({
   const [dataContrato, setDataContrato] = useState();
   const [dataHorario, setDataHorario] = useState();
 
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
   const getAuthheaders = () => ({
     headers: {
       Authorization: "Bearer " + token,
@@ -46,7 +46,7 @@ const HorarioContratoForm = ({
 
   return (
     <Modal isOpen={modal} toggle={toggle}>
-      <ModalHeader>Registar Horario a cumplir por el trabajador</ModalHeader>
+      <ModalHeader>Registros de los Horarios por Empleado</ModalHeader>
       <ModalBody>
         <form onSubmit={handleSubmit(submit)}>
           <div className="form-group">

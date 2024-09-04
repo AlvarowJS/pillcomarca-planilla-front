@@ -13,7 +13,7 @@ const HorarioForm = ({
 }) => {
   return (
     <Modal isOpen={modal} toggle={toggle}>
-      <ModalHeader>Registrar Horario de Trabajo</ModalHeader>
+      <ModalHeader>Registros de los Horarios</ModalHeader>
       <ModalBody>
         <form onSubmit={handleSubmit(submit)}>
           <div className="form-group">

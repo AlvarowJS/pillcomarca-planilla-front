@@ -13,7 +13,7 @@ const DocIdentForm = ({
   refresh,
 }) => {
   const [data, setData] = useState();
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
   const getAuthheaders = () => ({
     headers: {
       Authorization: "Bearer " + token,

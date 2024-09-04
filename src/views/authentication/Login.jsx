@@ -41,7 +41,7 @@ const Login = () => {
 
   const [isError, setIsError] = useState(false)
 
-  const submit = async (data) => {
+  /*const submit = async (data) => {
     try {
       const response = await bdMuni.post('/login', data);  // Reemplaza '/tu-ruta-api' con la ruta real de tu API      
       const res = response.data;      
@@ -60,7 +60,30 @@ const Login = () => {
       localStorage.setItem('nombres', '');
       setIsError(true)
     }
-  }
+  }*/
+
+    const submit = async (data) => {
+      try {
+        const response = await bdMuni.post('/login', data);  // Reemplaza '/tu-ruta-api' con la ruta real de tu API      
+        const res = response.data;
+        // 
+        localStorage.setItem('rol', res?.rol);
+        localStorage.setItem('accessToken', res?.accessToken);
+        localStorage.setItem('refreshToken', res?.refreshToken);
+        localStorage.setItem('userData', JSON.stringify(res?.userData));
+        // 
+        setIsError(false)
+        navigate('/trabajador')
+  
+      }
+      catch (err) {
+        localStorage.setItem('rol', '');
+        localStorage.setItem('accessToken', '');
+        localStorage.setItem('refreshToken', '');
+        localStorage.setItem('userData', '');
+        setIsError(true)
+      }
+    }
 
   return (
     <div className="auth-wrapper auth-cover">

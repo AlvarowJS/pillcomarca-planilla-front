@@ -4,10 +4,10 @@ import bdMuni from '../../api/bdMuni';
 
 const URL = "v1/tipo-documento-identidad";
 const TrabajadorForm = ({ 
-  toggle, modal, handleSubmit, register, reset, refresh, submit, setFoto, setHojaVida}) => {
+  toggle, modal, handleSubmit, register, reset, refresh, submit, setFoto, setHojaVida, dependencia, cargo}) => {
   
   const [data,setData] = useState();
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
   const getAuthheaders = () => ({
     headers: {
       Authorization: "Bearer " + token,
@@ -35,7 +35,7 @@ const TrabajadorForm = ({
   return (
     <Modal isOpen={modal} toggle={toggle}>
       <ModalHeader>
-        Registrar Trabajador
+        Registro de Trabajadores
       </ModalHeader>
       <ModalBody>
         <form onSubmit={handleSubmit(submit)}>
@@ -57,45 +57,77 @@ const TrabajadorForm = ({
                   </option>
                 ))}
               </select><br />
+              <label>Documento de identidad</label>
               <input 
                   className='form-control'
                   type='text'
                   placeholder='Ingrese su Documento de identidad'
                   {...register('numero_doumento')}
               /><br />
+              <label>Nombres</label>
               <input 
                   className='form-control'
                   type='text'
                   placeholder='Ingrese sus Nombres'
                   {...register('nombre')}
               /><br />
+              <label>Apellidos</label>
               <input 
                   className='form-control'
                   type='text'
                   placeholder='Ingrese sus Apellidos'
                   {...register('apellido')}
               /><br />
+              <label>Correo</label>
               <input 
                   className='form-control'
                   type='text'
                   placeholder='Ingrese su Correo'
                   {...register('email')}
               /><br />
+              <label>Telefono</label>
               <input 
                   className='form-control'
                   type='text'
                   placeholder='Ingrese su Telefono'
                   {...register('telefono')}
               /><br />
+              <label>Sexo</label>
               <select
                   className='form-control'
                   {...register('sexo')}
                   required
               >
-                <option value=''>Sexo</option>
+                <option value=''>Seleccione su sexo</option>
                 <option value='Masculino'>Masculino</option>
                 <option value='Femenino'>Femenino</option>
               
+              </select>
+              <br />
+              <label>Dependencia</label>
+              <select
+                className='form-control'
+                {...register('dependencia_id')}
+              >
+                <option value="">Seleccione la Dependencia</option>
+                {dependencia && dependencia.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.nombre}
+                  </option>
+                ))}
+              </select>
+              <br />
+              <label>Cargo</label>
+              <select
+                className='form-control'
+                {...register('cargo_id')}
+              >
+                <option value="">Seleccione el Cargo</option>
+                {cargo && cargo.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.nombre}
+                  </option>
+                ))}
               </select>
               <br />
               <label>Fecha de nacimineto</label>

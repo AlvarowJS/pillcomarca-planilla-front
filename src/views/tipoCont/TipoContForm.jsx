@@ -7,7 +7,7 @@ const TipoContForm = ({
   return (
     <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader>
-            Registrar Tipo de Contrato
+            Registros de los Tipos de Contratos
         </ModalHeader>
         <ModalBody>
             <form onSubmit={handleSubmit(submit)}>

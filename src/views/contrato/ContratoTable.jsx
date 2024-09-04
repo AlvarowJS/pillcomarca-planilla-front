@@ -34,16 +34,6 @@ const ContratoTable = ({ data, actualizarContratoId, eliminarContrato }) => {
     },
     {
       sortable: true,
-      name: "Cargo",
-      selector: (row) => row?.cargo_contrato,
-    },
-    {
-      sortable: true,
-      name: "Area",
-      selector: (row) => row?.area_contrato,
-    },
-    {
-      sortable: true,
       name: "Trabajador",
       selector: (row) => row?.trabajador.nombre,
     },

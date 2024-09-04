@@ -14,7 +14,7 @@ const DocIdent = () => {
   const [modal, setModal] = useState(false);
   const [actualizacion, setActualizacion] = useState(false);
   const { handleSubmit, register, reset } = useForm();
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
 
   const defaultValuesForm = {
     doc_identidad: "",

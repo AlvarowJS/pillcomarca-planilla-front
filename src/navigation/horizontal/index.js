@@ -1,4 +1,4 @@
-import { File, Tag, FileText, BarChart, Table, Edit, UserMinus, UserCheck } from "react-feather";
+import { File, Tag, FileText, BarChart, Table, Edit, UserMinus, UserCheck, Settings } from "react-feather";
 
 export default [
   {
@@ -19,6 +19,18 @@ export default [
     title: "Concepto Fijo",
     icon: <Tag size={20}/>,
     navLink: "/concepto-fijo",
+  },
+  {
+    id: "Dependencia",
+    title: "Dependencia",
+    icon: <Tag size={20}/>,
+    navLink: "/dependencia",
+  },
+  {
+    id: "Cargo",
+    title: "Cargo",
+    icon: <Tag size={20}/>,
+    navLink: "/cargo",
   },
   {
     id: "AsigContConc",
@@ -80,6 +92,18 @@ export default [
     icon: <Tag size={20} />,
     navLink: "/asistencia",
   },
-  
+  {
+    id: "Configuracion",
+    title: "Configuracion",
+    icon: <Settings size={20} />,
+    children: [
+      {
+        id: "Cargo",
+        title: "Cargo",
+        icon: <Tag size={20}/>,
+        navLink: "/configuracion/cargo",
+      }
+    ]
+  }
   
 ];
