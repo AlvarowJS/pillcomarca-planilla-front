@@ -11,6 +11,9 @@ const MySwal = withReactContent(Swal);
 const URL = "v1/trabajador";
 const URLDEPENDENCIA = "v1/dependencia"
 const URLCARGO = "v1/cargo"
+const URLFOTO = "v1/update-archivos"
+const URLEXPORT = "v1/carnet-exportar"
+
 const Trabajador = () => {
   const [total, setTotal] = useState();
   const [totalMujeres, setTotalMujeres] = useState();
@@ -28,15 +31,27 @@ const Trabajador = () => {
   const [cargo, setCargo] = useState();
   const [dependencia, setDependencia] = useState();
   const defaultValuesForm = {
-    datos_trabajador: "",
+    numero_doumento: "",
+    nombre: "",
+    apellido: "",
+    email: "",
+    telefono: "",
+    sexo: "",
+    fecha_nac: "",
+    foto: "",
+    hoja_vida: "",
+    tipo_documento_identidad_id: "",
+    dependencia_id: "",
+    cargo_id: ""    
   };
 
   const toggle = () => {
     setActualizacion(false);
+    reset(defaultValuesForm);
     setModal(!modal);
   };
   const toggleActualizacion = () => {
-    setActualizacion(true);
+    setModal(!modal);
   };
 
   const getAuthheaders = () => ({
@@ -113,9 +128,28 @@ const Trabajador = () => {
         });
       });
   };
+
+  const exportPdf =  (id) => {
+    window.open(`http://127.0.0.1:8000/api/v1/carnet-exportar/${id}`, '_blank');
+  }
+
   const actualizarTrabajador = (id, data) => {
+    const datos = new FormData()
+    datos.append('id', id);
+    datos.append('numero_doumento', data.numero_doumento);
+    datos.append('nombre', data.nombre);
+    datos.append('apellido', data.apellido);
+    datos.append('email', data.email);
+    datos.append('telefono', data.telefono);
+    datos.append('sexo', data.sexo);
+    datos.append('fecha_nac', data.fecha_nac);
+    datos.append('tipo_documento_identidad_id', data.tipo_documento_identidad_id);
+    datos.append('foto', foto);
+    datos.append('hoja_vida', hojaVida);
+    datos.append('dependencia_id', data.dependencia_id);
+    datos.append('cargo_id', data.cargo_id);
     bdMuni
-      .put(`${URL}/${id}`, data, getAuthheaders())
+      .post(URLFOTO, datos, getAuthheaders())
       .then((res) => {
         reset(defaultValuesForm);
         setRefresh(!refresh);
@@ -123,7 +157,7 @@ const Trabajador = () => {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Registro Guardado Exitosamente",
+          title: "Registro Acualizado Exitosamente",
           timer: 1500,
           showConfirmButton: false,
         });
@@ -177,7 +211,7 @@ const Trabajador = () => {
     });
   };
   const actualizarTrabajadorId = (id) => {
-    toggle.call();
+    toggleActualizacion.call();
     setActualizacion(true);
     bdMuni
       .get(`${URL}/${id}`, getAuthheaders())
@@ -259,6 +293,7 @@ const Trabajador = () => {
         search={search}
         actualizarTrabajadorId={actualizarTrabajadorId}
         eliminarTrabajador={eliminarTrabajador}
+        exportPdf={exportPdf}
       />
     </>
   );

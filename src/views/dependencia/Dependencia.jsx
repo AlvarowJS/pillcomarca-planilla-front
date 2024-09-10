@@ -19,15 +19,17 @@ const Dependencia = () => {
   const token = localStorage.getItem("accessToken");
 
   const defaultValuesForm = {
-    dependencia: "",
+    nombre: "",
+    descripcion: ""
   };
   const toggle = () => {
     setActualizacion(false);
+    reset(defaultValuesForm);
     setModal(!modal);
   }
   
   const toggleActualizacion = () =>{
-    setActualizacion(true);
+    setModal(!modal);
   }
   
   const getAuthheaders = () => ({
@@ -136,7 +138,7 @@ const Dependencia = () => {
   };
 
   const actualizarDependenciaId = (id) =>{
-    toggle.call()
+    toggleActualizacion.call()
     setActualizacion(true)
     bdMuni.get(`${URL}/${id}`, getAuthheaders())
       .then(res => {

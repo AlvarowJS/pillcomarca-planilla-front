@@ -26,11 +26,12 @@ const ContratoConcep = () => {
 
   const toggle = () => {
     setActualizacion(false);
+    reset(defaultValuesForm);
     setModal(!modal);
   };
 
   const toggleActualizacion = () => {
-    setActualizacion(true);
+    setModal(!modal)
   };
 
   const getAuthheaders = () => ({
@@ -152,7 +153,7 @@ const ContratoConcep = () => {
   };
 
   const actualizarContratoConcepId = (id) => {
-    toggle.call();
+    toggleActualizacion.call();
     setActualizacion(true);
     bdMuni
       .get(`${URL}/${id}`, getAuthheaders())

@@ -18,15 +18,16 @@ const Universidad = () => {
   const token = localStorage.getItem("accessToken");
 
   const defaultValuesForm = {
-    universidad: "",
+    nombre: "",
   };
   const toggle = () => {
     setActualizacion(false);
+    reset(defaultValuesForm);
     setModal(!modal);
   }
   
   const toggleActualizacion = () =>{
-    setActualizacion(true);
+    setModal(!modal)
   }
   
   const getAuthheaders = () => ({
@@ -137,7 +138,7 @@ const Universidad = () => {
   }
 
   const actualizarUniversidadId = (id) =>{
-    toggle.call()
+    toggleActualizacion.call()
     setActualizacion(true)
     bdMuni.get(`${URL}/${id}`, getAuthheaders())
       .then(res => {
