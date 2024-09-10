@@ -25,16 +25,24 @@ const Contrato = () => {
   const token = localStorage.getItem("accessToken");
 
   const defaultValuesForm = {
-    contrato: "",
+    inicio_contrato: "",
+    fin_contrato: "",
+    terminos_contrato: "",
+    sueldo_contrato: "",
+    trabajador_id: "",
+    tipo_contrato_id: "",
+    categoria_id: "",
+    documento_c: ""
   };
 
   const toggle = () => {
     setActualizacion(false);
+    reset(defaultValuesForm);
     setModal(!modal);
   };
 
   const toggleActualizacion = () => {
-    setActualizacion(true);
+    setModal(!modal)
   };
 
   const getAuthheaders = () => ({
@@ -175,7 +183,7 @@ const Contrato = () => {
   };
 
   const actualizarContratoId = (id) => {
-    toggle.call();
+    toggleActualizacion.call();
     setActualizacion(true);
     bdMuni
       .get(`${URL}/${id}`, getAuthheaders())

@@ -18,15 +18,21 @@ const Practicante = () => {
   const token = localStorage.getItem("accessToken");
 
   const defaultValuesForm = {
-    practicante: "",
+    num_documento: "",
+    nombre: "",
+    apellido: "",
+    universidad_id: "",
+    tipo_documento_id: "",
+    carrera_id: ""
   };
   const toggle = () => {
     setActualizacion(false);
+    reset(defaultValuesForm)
     setModal(!modal);
   }
   
   const toggleActualizacion = () =>{
-    setActualizacion(true);
+    setModal(!modal);
   }
   
   const getAuthheaders = () => ({
@@ -135,7 +141,7 @@ const Practicante = () => {
   };
 
   const actualizarPracticanteId = (id) =>{
-    toggle.call()
+    toggleActualizacion.call()
     setActualizacion(true)
     bdMuni.get(`${URL}/${id}`, getAuthheaders())
       .then(res => {

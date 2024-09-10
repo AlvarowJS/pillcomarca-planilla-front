@@ -18,16 +18,19 @@ const ConcFijo = () => {
   const token = localStorage.getItem("accessToken");
 
   const defaultValuesForm = {
-    conc_fijo: "",
+    nombre_concepto: '',
+    descripcion: '',
+    valor: ''
   };
 
   const toggle = () =>{
     setActualizacion(false);
+    reset(defaultValuesForm);
     setModal(!modal);
   }
 
   const toggleActualizacion = () =>{
-    setActualizacion(true);
+    setModal(!modal);
   }
   const getAuthheaders = () => ({
     headers: {
@@ -51,8 +54,8 @@ const ConcFijo = () => {
     bdMuni
     .post(URL, data, getAuthheaders())
     .then((res) =>{
-      toggle.call();
-      reset(defaultValuesForm);
+      reset(defaultValuesForm)
+      toggle.call()
       setRefresh(!refresh)
       Swal.fire({
         position: 'center',
@@ -76,8 +79,8 @@ const ConcFijo = () => {
     bdMuni.put(`${URL}/${id}`,data, getAuthheaders())
     .then(res =>{
       reset(defaultValuesForm)
-      setRefresh(!refresh)
       toggle.call()
+      setRefresh(!refresh)
       Swal.fire({
         position: 'center',
         icon: 'success',
@@ -131,7 +134,7 @@ const ConcFijo = () => {
     })
   };
   const actualizarConceptoFijoId = (id) => {
-    toggle.call()
+    toggleActualizacion.call()
     setActualizacion(true)
     bdMuni.get(`${URL}/${id}`, getAuthheaders())
       .then(res => {
@@ -156,6 +159,7 @@ const ConcFijo = () => {
       </button>
       <ConceptoFijoForm 
           toggle={toggle}
+          toggleActualizacion={toggleActualizacion}
           modal={modal}
           handleSubmit={handleSubmit}
           register={register}

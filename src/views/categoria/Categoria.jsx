@@ -19,16 +19,18 @@ const categoria = () => {
   const token = localStorage.getItem("accessToken");
 
   const defaultValuesForm = {
-    categoria: "",
+    nombre: "",
+    descripccion: ""
   };
 
   const toggle = () =>{
     setActualizacion(false);
+    reset(defaultValuesForm);
     setModal(!modal);
   }
 
   const toggleActualizacion = () =>{
-    setActualizacion(true);
+    setModal(!modal);
   }
   const getAuthheaders = () => ({
     headers: {
@@ -135,7 +137,7 @@ const categoria = () => {
       }
     )};
   const actualizaCategoriaId = (id) => {
-    toggle.call()
+    toggleActualizacion.call()
     setActualizacion(true)
     bdMuni.get(`${URL}/${id}`, getAuthheaders())
       .then(res => {

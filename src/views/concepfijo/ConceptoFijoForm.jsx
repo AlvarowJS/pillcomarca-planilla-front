@@ -4,7 +4,14 @@ import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 
 
 const URL = "v1/contratoSimple";
-const ConceptoFijoForm = ({toggle, modal, handleSubmit, register, reset, submit, refresh,
+const ConceptoFijoForm = ({
+  toggle, 
+  modal, 
+  handleSubmit, 
+  register, 
+  submit, 
+  refresh, 
+  toggleActualizacion
 }) => {
 
   const [data, setData] = useState();
@@ -26,7 +33,7 @@ const ConceptoFijoForm = ({toggle, modal, handleSubmit, register, reset, submit,
   }, [refresh]);
 
   return (
-    <Modal isOpen={modal} toggle={toggle}>
+    <Modal isOpen={modal} toggle={toggle || toggleActualizacion}>
             <ModalHeader>
                 Registro de Conceptos Fijos
             </ModalHeader>

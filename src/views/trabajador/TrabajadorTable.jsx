@@ -1,8 +1,8 @@
 import React from 'react'
 import DataTable from 'react-data-table-component';
-import { Edit, Trash } from 'react-feather'
+import { Edit, Trash, User } from 'react-feather'
 
-const TrabajadorTable = ({ data, actualizarTrabajadorId, eliminarTrabajador, filter, search}) => {
+const TrabajadorTable = ({ data, actualizarTrabajadorId, eliminarTrabajador, filter, search, exportPdf}) => {
   
   const abrirCV = (cv) => {
     window.open(`http://127.0.0.1:8000/storage/documento/${cv}`,'_blank')
@@ -32,6 +32,11 @@ const TrabajadorTable = ({ data, actualizarTrabajadorId, eliminarTrabajador, fil
       sortable: true,
       name: "Dependencia",
       selector: (row) => row?.dependencia?.nombre,
+    },
+    {
+      sortable: true,
+      name: "Cargo",
+      selector: (row) => row?.cargo.nombre,
     },
     {
       sortable: true,
@@ -98,6 +103,12 @@ const TrabajadorTable = ({ data, actualizarTrabajadorId, eliminarTrabajador, fil
               onClick={() => eliminarTrabajador(row?.id)}
             >
               <Trash />
+            </button>
+            <button
+              className='btn btn-success'
+              onClick={ () => exportPdf(row?.id)}
+            >
+              <User />
             </button>
           </>
         );

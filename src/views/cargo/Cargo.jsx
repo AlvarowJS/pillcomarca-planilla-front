@@ -18,16 +18,18 @@ const URLCARGO = "v1/cargo"
   const token = localStorage.getItem("accessToken");
   
   const defaultValuesForm = {
-    cargo: "",
+    nombre: "",
+    descripcion: ""
   };
   
   const toggle = () => {
     setActualizacion(false);
+    reset(defaultValuesForm);
     setModal(!modal);
   }
 
   const toggleActualizacion = () => {
-    setActualizacion(true)
+    setModal(!modal);
   }
 
   const getAuthheaders = () => ({
@@ -136,7 +138,7 @@ const URLCARGO = "v1/cargo"
   };
 
   const actualizarCargoId = (id) =>{
-    toggle.call()
+    toggleActualizacion.call()
     setActualizacion(true)
     bdMuni.get(`${URLCARGO}/${id}`, getAuthheaders())
       .then(res => {
