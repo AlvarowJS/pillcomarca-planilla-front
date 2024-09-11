@@ -2,7 +2,7 @@ import React from 'react'
 import DataTable from 'react-data-table-component';
 import { Edit, Trash } from 'react-feather'
 
-const TipoContTabla = ({ data, actualizarContratoId, eliminarContrato}) => {
+const TipoContTabla = ({ data, actualizarContratoId, eliminarContrato, search, filter}) => {
   const columns = [
     {
       sortable: true,
@@ -43,7 +43,7 @@ const TipoContTabla = ({ data, actualizarContratoId, eliminarContrato}) => {
         pagination
         className='react-datatable'
         columns={columns}
-        data={data}/>
+        data={search ? filter : data}/>
     </div>
   );
 };

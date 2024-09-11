@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import bdMuni from '../../api/bdMuni'
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import { Col, Input, Label, Row } from 'reactstrap'
 const MySwal = withReactContent(Swal);
 
 const URL = "v1/universidad"
@@ -15,6 +16,8 @@ const Universidad = () => {
   const [modal, setModal] = useState(false);
   const [actualizacion, setActualizacion] = useState(false);
   const { handleSubmit, register, reset } = useForm();
+  const [search, setSearch] = useState();
+  const [filter, setFilter] = useState();
   const token = localStorage.getItem("accessToken");
 
   const defaultValuesForm = {
@@ -156,9 +159,42 @@ const Universidad = () => {
       crearUniversidad(data)
     }
   }
+
+  const handleFilter = (e) => {
+    setSearch(e.target.value);
+  };
+
+  useEffect(() => {
+    setFilter(
+      data?.filter(
+        (e) => (
+          e.nombre &&
+            e.nombre.toLowerCase().indexOf(search?.toLowerCase()) !== -1
+        )
+      )
+    );
+  }, [data, search])
+  
   return (
     <>
-        <button className='btn btn-primary' onClick={toggle}>+ Agregar</button>
+        <Row className='mb-2'>
+          <Col sm='6'>
+            <button className="btn btn-primary" onClick={toggle}>
+              + Agregar
+            </button>
+            </Col>
+          <Col sm='1'></Col>
+          <Col sm='5'>
+            <Label for="search-input" className='me-1'>Buscador</Label>
+            <Input
+              className="dataTable-filter"
+              type="text"
+              bsSize="sm"
+              id="search-input"
+              onChange={handleFilter}
+            />
+          </Col>
+        </Row>
         <UniversidadForm 
           toggle={toggle}
           modal={modal}
@@ -171,6 +207,8 @@ const Universidad = () => {
 
         <UniversidadTable 
           data = {data}
+          search={search}
+          filter={filter}
           actualizarUniversidadId = {actualizarUniversidadId}
           eliminarUniversidad = {eliminarUniversidad}
         />

@@ -6,6 +6,8 @@ const ContratoConcepTable = ({
   data,
   actualizarContratoConcepId,
   eliminarContratoConcep,
+  filter,
+  seacrh
 }) => {
   const columns = [
     {
@@ -73,7 +75,7 @@ const ContratoConcepTable = ({
         pagination
         className="react-datatable"
         columns={columns}
-        data={data}
+        data={seacrh ? filter : data}
       />
     </div>
   );

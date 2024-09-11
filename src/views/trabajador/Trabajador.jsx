@@ -244,10 +244,18 @@ const Trabajador = () => {
               search?.toLowerCase()
             ) !== -1) ||
           (e.numero_doumento &&
-            e.numero_doumento.toLowerCase().indexOf(search?.toLowerCase()) !==
-              -1) ||
+            e.numero_doumento.toLowerCase().indexOf(search?.toLowerCase()) !== -1
+          ) ||
           (e.nombre &&
-            e.nombre.toLowerCase().indexOf(search?.toLowerCase()) !== -1)
+            e.nombre.toLowerCase().indexOf(search?.toLowerCase()) !== -1
+          ) ||
+          (e.cargo.nombre &&
+            e.cargo.nombre.toLowerCase().indexOf(search?.toLowerCase()) !== -1
+          ) ||
+          (e.dependencia.nombre &&
+            e.dependencia.nombre.toLowerCase().indexOf(search?.toLowerCase()) !== -1
+          )
+            
       )
     );
   }, [data, search]);

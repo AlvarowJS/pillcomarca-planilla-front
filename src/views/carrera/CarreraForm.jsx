@@ -31,7 +31,7 @@ const CarreraForm = ({
               <input
                 className="form-control"
                 type="text"
-                placeholder="Alguna Descripccion"
+                placeholder="Ingrese su Descripccion"
                 {...register("descripcion")}
               />
             </div>

@@ -49,8 +49,9 @@ const TrabajadorForm = ({
               <select 
                   className='form-control'
                   {...register('tipo_documento_identidad_id')}
+                  required
               >
-                <option value="">Selecciones el Tipo de Documento</option>
+                <option value="">Seleccione el Tipo de Documento</option>
                 {data && data.map((item) => (
                   <option key={item.id} value={item.id}>
                     {item.nombre_tipo_doc}
@@ -60,9 +61,11 @@ const TrabajadorForm = ({
               <label>Documento de identidad</label>
               <input 
                   className='form-control'
-                  type='text'
-                  placeholder='Ingrese su Documento de identidad'
+                  type='number'
+                  placeholder='Ingrese su Documento de Identidad'
+                  maxLength={8}
                   {...register('numero_doumento')}
+                  required
               /><br />
               <label>Nombres</label>
               <input 
@@ -70,6 +73,7 @@ const TrabajadorForm = ({
                   type='text'
                   placeholder='Ingrese sus Nombres'
                   {...register('nombre')}
+                  required
               /><br />
               <label>Apellidos</label>
               <input 
@@ -77,20 +81,24 @@ const TrabajadorForm = ({
                   type='text'
                   placeholder='Ingrese sus Apellidos'
                   {...register('apellido')}
+                  required
               /><br />
               <label>Correo</label>
               <input 
                   className='form-control'
-                  type='text'
+                  type='email'
                   placeholder='Ingrese su Correo'
                   {...register('email')}
+                  required
               /><br />
               <label>Telefono</label>
               <input 
                   className='form-control'
                   type='text'
                   placeholder='Ingrese su Telefono'
+                  maxLength={9}
                   {...register('telefono')}
+                  required
               /><br />
               <label>Sexo</label>
               <select
@@ -98,7 +106,7 @@ const TrabajadorForm = ({
                   {...register('sexo')}
                   required
               >
-                <option value=''>Seleccione su sexo</option>
+                <option value=''>Seleccione su Sexo</option>
                 <option value='Masculino'>Masculino</option>
                 <option value='Femenino'>Femenino</option>
               
@@ -108,6 +116,7 @@ const TrabajadorForm = ({
               <select
                 className='form-control'
                 {...register('dependencia_id')}
+                required
               >
                 <option value="">Seleccione la Dependencia</option>
                 {dependencia && dependencia.map((item) => (
@@ -121,6 +130,7 @@ const TrabajadorForm = ({
               <select
                 className='form-control'
                 {...register('cargo_id')}
+                required
               >
                 <option value="">Seleccione el Cargo</option>
                 {cargo && cargo.map((item) => (
@@ -130,11 +140,12 @@ const TrabajadorForm = ({
                 ))}
               </select>
               <br />
-              <label>Fecha de nacimineto</label>
+              <label>Fecha de Nacimineto</label>
               <input 
                   className='form-control'
                   type='date'
                   {...register('fecha_nac')}
+                  required
               /><br />
               <label>Ingrese Foto del Trabajador</label>
               <input 
@@ -142,6 +153,7 @@ const TrabajadorForm = ({
                   type='file'
                   {...register('foto')}
                   onChange={handleFotoChange}
+                  required
               /><br />
               <label>Ingrese el Curriculum</label>
               <input 
@@ -149,6 +161,7 @@ const TrabajadorForm = ({
                   type='file'
                   {...register('hoja_vida')}
                   onChange={handleHojaChange}
+                  required
               /><br />
               
 

@@ -2,7 +2,7 @@ import React from 'react'
 import DataTable from 'react-data-table-component';
 import { Edit, Trash } from 'react-feather';
 
-const PracticanteTable = ({ data, actualizarPracticanteId, eliminarPracticante }) => {
+const PracticanteTable = ({ data, actualizarPracticanteId, eliminarPracticante, filter, search }) => {
 
     const columns = [
         {
@@ -64,7 +64,7 @@ const PracticanteTable = ({ data, actualizarPracticanteId, eliminarPracticante }
             pagination
             className='react-datatable'
             columns={columns}
-            data={data}
+            data={search ? filter : data}
         />
     </div>
   )

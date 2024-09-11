@@ -2,7 +2,7 @@ import React from "react";
 import DataTable from "react-data-table-component";
 import { Edit, Trash } from "react-feather";
 
-const HorarioTable = ({ data, actualizarHorarioId, eliminarHorario }) => {
+const HorarioTable = ({ data, actualizarHorarioId, eliminarHorario, filter, search}) => {
   const columns = [
     {
       sortable: true,
@@ -54,7 +54,7 @@ const HorarioTable = ({ data, actualizarHorarioId, eliminarHorario }) => {
         pagination
         className="react-datatable"
         columns={columns}
-        data={data}
+        data={search ? filter : data}
       />
     </div>
   );

@@ -17,7 +17,7 @@ const TipoDocForm = ({
                     <input
                         className='form-control'
                         type='text'
-                        placeholder='Ingrese nombre del tipo de documentp'
+                        placeholder='Ingrese nombre del Documento'
                         {...register('nombre_tipo_doc')}
                     />                                        
                 </div><br />
