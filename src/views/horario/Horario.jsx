@@ -5,6 +5,7 @@ import HorarioForm from "./HorarioForm";
 import HorarioTable from "./HorarioTable";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { Col, Input, Label, Row } from "reactstrap";
 const MySwal = withReactContent(Swal);
 
 const URL = "v1/horario";
@@ -16,6 +17,8 @@ const Horario = () => {
   const [actualizacion, setActualizacion] = useState(false);
   const { handleSubmit, register, reset } = useForm();
   const token = localStorage.getItem("accessToken");
+  const [search, setSearch] = useState();
+  const [filter, setFilter] = useState();
 
   const defaultValuesForm = {
     turno: "",
@@ -161,11 +164,44 @@ const Horario = () => {
       crearHorario(data);
     }
   };
+
+  const handleFilter = (e) => {
+    setSearch(e.target.value);
+  };
+
+  useEffect(() => {
+    setFilter(
+      data?.filter(
+        (e) => (
+          e.turno &&
+            e.turno.toLowerCase().indexOf(search?.toLowerCase()) !== -1
+          ) || (e.horaentrada && e.horaentrada.toLowerCase().indexOf(search?.toLowerCase()) !== -1
+          ) || (e.horasalida && e.horasalida.toLowerCase().indexOf(search?.toLowerCase()) !== -1
+        )
+      )
+    );
+  }, [data, search]);
+  
   return (
     <>
-      <button className="btn btn-primary" onClick={toggle}>
-        + Agregar
-      </button>
+      <Row className='mb-2'>
+        <Col sm='6'>
+          <button className="btn btn-primary" onClick={toggle}>
+            + Agregar
+          </button>
+        </Col>
+        <Col sm='1'></Col>
+        <Col sm='5'>
+          <Label for="search-input" className='me-1'>Buscador</Label>
+          <Input
+            className="dataTable-filter"
+            type="text"
+            bsSize="sm"
+            id="search-input"
+            onChange={handleFilter}
+          />
+        </Col>
+      </Row>
       <HorarioForm
         toggle={toggle}
         modal={modal}
@@ -178,6 +214,8 @@ const Horario = () => {
 
       <HorarioTable
         data={data}
+        search={search}
+        filter={filter}
         actualizarHorarioId={actualizarHorarioId}
         eliminarHorario={eliminarHorario}
       />

@@ -15,7 +15,7 @@ const DependenciaForm = ({
                         <input
                             className='form-control'
                             type='text'
-                            placeholder='Ingrese el nombre de la Dependencia'
+                            placeholder='Ingrese el Nombre de la Dependencia'
                             {...register("nombre")}
                         />
                     </div><br />
@@ -24,7 +24,7 @@ const DependenciaForm = ({
                         <input
                             className='form-control'
                             type='text'
-                            placeholder='Alguna Descripcion'
+                            placeholder='Ingrese su Descripccion'
                             {...register("descripcion")}
                         />
                     </div>

@@ -66,8 +66,9 @@ const PracticanteForm = ({toggle, modal, handleSubmit, register, reset, submit, 
                             <label>Numero de Documento</label>
                             <input 
                                 className='form-control'
-                                type='text'
-                                placeholder='Ingrese su numero de documento'
+                                type='number'
+                                placeholder='Ingrese su Numero de Documento'
+                                maxLength={8}
                                 {...register('num_documento')}
                             />
                         </div><br />

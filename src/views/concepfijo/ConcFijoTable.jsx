@@ -2,7 +2,7 @@ import React from 'react'
 import DataTable from 'react-data-table-component';
 import { Edit, Trash } from 'react-feather';
 
-const ConcFijoTable = ({ data, actualizarConceptoFijoId, eliminarConceptoFijo}) => {
+const ConcFijoTable = ({ data, actualizarConceptoFijoId, eliminarConceptoFijo, filter, search}) => {
     const columns = [
       {
           sortable: true,
@@ -54,7 +54,7 @@ const ConcFijoTable = ({ data, actualizarConceptoFijoId, eliminarConceptoFijo}) 
               pagination
               className='react-datatable'
               columns={columns}
-              data={data}/>
+              data={search ? filter : data}/>
       </div>
     );
   };

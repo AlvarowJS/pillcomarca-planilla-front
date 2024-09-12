@@ -2,7 +2,7 @@ import React from 'react'
 import DataTable from 'react-data-table-component';
 import { Edit, Trash } from 'react-feather';
 
-const CarreraTable = ({ data, actualizarCarreraId, eliminarCarrera }) => {
+const CarreraTable = ({ data, actualizarCarreraId, eliminarCarrera, filter, search }) => {
 
     const columns = [
         {
@@ -49,7 +49,7 @@ const CarreraTable = ({ data, actualizarCarreraId, eliminarCarrera }) => {
             pagination
             className='react-datatable'
             columns={columns}
-            data={data}
+            data={search ? filter : data}
         />
     </div>
   )

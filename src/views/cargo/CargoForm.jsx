@@ -21,7 +21,7 @@ const CargoForm = ({
                 <input
                     className="form-control"
                     type="text"
-                    placeholder="Ingrese el nombre de la carrera"
+                    placeholder="Ingrese el nombre del Cargo"
                     {...register("nombre")}
                 />
                 </div>
@@ -31,7 +31,7 @@ const CargoForm = ({
                 <input
                     className="form-control"
                     type="text"
-                    placeholder="Alguna Descripccion"
+                    placeholder="Ingrese su Descripccion"
                     {...register("descripcion")}
                 />
                 </div>

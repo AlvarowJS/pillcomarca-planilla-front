@@ -7,6 +7,7 @@ import ContratoConcepForm from "./ContratoConcepForm";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { Warning } from "postcss";
+import { Col, Input, Label, Row } from "reactstrap";
 const MySwal = withReactContent(Swal);
 const URL = "v1/contratoconcepto";
 const URLMESES = "v1/meses";
@@ -19,6 +20,8 @@ const ContratoConcep = () => {
   const { handleSubmit, register, reset } = useForm();
   const [dataMeses, setDataMeses] = useState();
   const token = localStorage.getItem("accessToken");
+  const [search, setSearch] = useState();
+  const [filter, setFilter] = useState();
 
   const defaultValuesForm = {
     contratoconcep: "",
@@ -173,11 +176,41 @@ const ContratoConcep = () => {
     }
   };
 
+  const handleFilter = (e) => {
+    setSearch(e.target.value);
+  };
+  useEffect(() => {
+    setFilter(
+      data?.filter(
+        (e) => (
+          e.contrato?.trabajador?.nombre && 
+            e.contrato?.trabajador?.nombre.toLowerCase().indexOf(search?.toLowerCase()) !== -1
+        )
+      )
+    );
+  }, [data, search]);
+  
+
   return (
     <>
-      <button className="btn btn-primary" onClick={toggle}>
-        + Agregar
-      </button>
+      <Row className='mb-2'>
+          <Col sm='6'>
+            <button className="btn btn-primary" onClick={toggle}>
+              + Agregar
+            </button>
+            </Col>
+          <Col sm='1'></Col>
+          <Col sm='5'>
+            <Label for="search-input" className='me-1'>Buscador</Label>
+            <Input
+              className="dataTable-filter"
+              type="text"
+              bsSize="sm"
+              id="search-input"
+              onChange={handleFilter}
+            />
+          </Col>
+      </Row>
       <ContratoConcepForm
         toggle={toggle}
         modal={modal}
@@ -190,6 +223,8 @@ const ContratoConcep = () => {
       />
       <ContratoConcepTable
         data={data}
+        seacrh={search}
+        filter={filter}
         actualizarContratoConcepId={actualizarContratoConcepId}
         eliminarContratoConcep={eliminarContratoConcep}
       />
