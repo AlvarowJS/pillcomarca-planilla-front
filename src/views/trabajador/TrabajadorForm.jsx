@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Modal, ModalBody, ModalHeader } from 'reactstrap'
+import { Col, Modal, ModalBody, ModalHeader, Row } from 'reactstrap'
 import bdMuni from '../../api/bdMuni';
 
 const URL = "v1/tipo-documento-identidad";
-const TrabajadorForm = ({ 
-  toggle, modal, handleSubmit, register, reset, refresh, submit, setFoto, setHojaVida, dependencia, cargo}) => {
-  
-  const [data,setData] = useState();
+const TrabajadorForm = ({
+  toggle, modal, handleSubmit, register, reset, refresh, submit, setFoto, setHojaVida, dependencia, cargo }) => {
+
+  const [data, setData] = useState();
   const token = localStorage.getItem("accessToken");
   const getAuthheaders = () => ({
     headers: {
@@ -21,35 +21,33 @@ const TrabajadorForm = ({
     const hoja = event.target.files[0]
     setHojaVida(hoja)
   }
-  useEffect(() =>{
+  useEffect(() => {
     bdMuni
-    .get(URL, getAuthheaders())
-    .then((res) => {
-      setData(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+      .get(URL, getAuthheaders())
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }, [refresh])
 
   return (
-    <Modal isOpen={modal} toggle={toggle}>
+    <Modal isOpen={modal} toggle={toggle} size='lg'>
       <ModalHeader>
         Registro de Trabajadores
       </ModalHeader>
       <ModalBody>
         <form onSubmit={handleSubmit(submit)}>
-            <div className='form-group'>
+          <Row className='my-2'>
+            <Col>
               <label>
-                Trabajador
+                Tipo de Documento
               </label>
-              <label>
-                Tipo de Documento  
-              </label>
-              <select 
-                  className='form-control'
-                  {...register('tipo_documento_identidad_id')}
-                  required
+              <select
+                className='form-control'
+                {...register('tipo_documento_identidad_id')}
+                required
               >
                 <option value="">Seleccione el Tipo de Documento</option>
                 {data && data.map((item) => (
@@ -57,75 +55,84 @@ const TrabajadorForm = ({
                     {item.nombre_tipo_doc}
                   </option>
                 ))}
-              </select><br />
+              </select>
+            </Col>
+            <Col>
               <label>Documento de identidad</label>
-              <input 
-                  className='form-control'
-                  type='number'
-                  placeholder='Ingrese su Documento de Identidad'
-                  maxLength={8}
-                  {...register('numero_doumento')}
-                  required
-              /><br />
+              <input
+                className='form-control'
+                type='number'
+                placeholder='Ingrese su Documento de Identidad'
+                maxLength={8}
+                {...register('numero_doumento')}
+                required
+              />
+            </Col>
+
+          </Row>
+          <Row>
+            <Col>
               <label>Nombres</label>
-              <input 
-                  className='form-control'
-                  type='text'
-                  placeholder='Ingrese sus Nombres'
-                  {...register('nombre')}
-                  required
-              /><br />
+              <input
+                className='form-control'
+                type='text'
+                placeholder='Ingrese sus Nombres'
+                {...register('nombre')}
+                required
+              />
+            </Col>
+            <Col>
               <label>Apellidos</label>
-              <input 
-                  className='form-control'
-                  type='text'
-                  placeholder='Ingrese sus Apellidos'
-                  {...register('apellido')}
-                  required
-              /><br />
+              <input
+                className='form-control'
+                type='text'
+                placeholder='Ingrese sus Apellidos'
+                {...register('apellido')}
+                required
+              />
+            </Col>
+
+
+          </Row>
+
+          <Row className='my-2'>
+            <Col>
               <label>Correo</label>
-              <input 
-                  className='form-control'
-                  type='email'
-                  placeholder='Ingrese su Correo'
-                  {...register('email')}
-                  required
-              /><br />
-              <label>Telefono</label>
-              <input 
-                  className='form-control'
-                  type='text'
-                  placeholder='Ingrese su Telefono'
-                  maxLength={9}
-                  {...register('telefono')}
-                  required
-              /><br />
+              <input
+                className='form-control'
+                type='email'
+                placeholder='Ingrese su Correo'
+                {...register('email')}
+                required
+              />
+            </Col>
+            <Col>
               <label>Sexo</label>
               <select
-                  className='form-control'
-                  {...register('sexo')}
-                  required
+                className='form-control'
+                {...register('sexo')}
+                required
               >
                 <option value=''>Seleccione su Sexo</option>
                 <option value='Masculino'>Masculino</option>
                 <option value='Femenino'>Femenino</option>
-              
               </select>
-              <br />
-              <label>Dependencia</label>
-              <select
+            </Col>
+            <Col>
+              <label>Telefono</label>
+              <input
                 className='form-control'
-                {...register('dependencia_id')}
+                type='text'
+                placeholder='Ingrese su Telefono'
+                maxLength={9}
+                {...register('telefono')}
                 required
-              >
-                <option value="">Seleccione la Dependencia</option>
-                {dependencia && dependencia.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.nombre}
-                  </option>
-                ))}
-              </select>
-              <br />
+              />
+            </Col>
+          </Row>
+
+          <Row className='my-2'>
+            <Col>
               <label>Cargo</label>
               <select
                 className='form-control'
@@ -139,34 +146,46 @@ const TrabajadorForm = ({
                   </option>
                 ))}
               </select>
-              <br />
-              <label>Fecha de Nacimineto</label>
-              <input 
-                  className='form-control'
-                  type='date'
-                  {...register('fecha_nac')}
-                  required
-              /><br />
-              <label>Ingrese Foto del Trabajador</label>
-              <input 
-                  className='form-control'
-                  type='file'
-                  {...register('foto')}
-                  onChange={handleFotoChange}
-                  required
-              /><br />
-              <label>Ingrese el Curriculum</label>
-              <input 
-                  className='form-control'
-                  type='file'
-                  {...register('hoja_vida')}
-                  onChange={handleHojaChange}
-                  required
-              /><br />
-              
+            </Col>
+            <Col>
+              <label>Dependencia</label>
+              <select
+                className='form-control'
+                {...register('dependencia_id')}
+                required
+              >
+                <option value="">Seleccione la Dependencia</option>
+                {dependencia && dependencia.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.nombre}
+                  </option>
+                ))}
+              </select>
+            </Col>
 
-            </div>
-            <button className='btn btn-primary'>Guardar</button>
+          </Row>
+          <div ckas>
+            <label>Ingrese Foto del Trabajador</label>
+            <input
+              className='form-control'
+              type='file'
+              {...register('foto')}
+              onChange={handleFotoChange}
+              required
+            />
+          </div>
+          <div className='my-2'>
+            <label>Ingrese el Curriculum</label>
+            <input
+              className='form-control'
+              type='file'
+              {...register('hoja_vida')}
+              onChange={handleHojaChange}
+              required
+            />
+          </div>
+
+          <button className='btn btn-primary'>Guardar</button>
         </form>
       </ModalBody>
     </Modal>
