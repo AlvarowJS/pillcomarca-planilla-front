@@ -31,7 +31,7 @@ const Trabajador = () => {
   const [cargo, setCargo] = useState();
   const [dependencia, setDependencia] = useState();
   const defaultValuesForm = {
-    numero_doumento: "",
+    numero_documento: "",
     nombre: "",
     apellido: "",
     email: "",
@@ -91,7 +91,7 @@ const Trabajador = () => {
   }, []);
   const crearTrabajador = (data) => {
     const datos = new FormData()
-    datos.append('numero_doumento', data.numero_doumento);
+    datos.append('numero_documento', data.numero_documento);
     datos.append('nombre', data.nombre);
     datos.append('apellido', data.apellido);
     datos.append('email', data.email);
@@ -136,7 +136,7 @@ const Trabajador = () => {
   const actualizarTrabajador = (id, data) => {
     const datos = new FormData()
     datos.append('id', id);
-    datos.append('numero_doumento', data.numero_doumento);
+    datos.append('numero_documento', data.numero_documento);
     datos.append('nombre', data.nombre);
     datos.append('apellido', data.apellido);
     datos.append('email', data.email);
@@ -243,8 +243,8 @@ const Trabajador = () => {
             (e.nombre.toLowerCase() + " " + e.apellido.toLowerCase()).indexOf(
               search?.toLowerCase()
             ) !== -1) ||
-          (e.numero_doumento &&
-            e.numero_doumento.toLowerCase().indexOf(search?.toLowerCase()) !== -1
+          (e.numero_documento &&
+            e.numero_documento.toLowerCase().indexOf(search?.toLowerCase()) !== -1
           ) ||
           (e.nombre &&
             e.nombre.toLowerCase().indexOf(search?.toLowerCase()) !== -1

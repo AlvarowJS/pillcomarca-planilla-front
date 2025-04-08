@@ -16,7 +16,7 @@ const TrabajadorTable = ({ data, actualizarTrabajadorId, eliminarTrabajador, fil
     {
       sortable: true,
       name: "Numero de Documento",
-      selector: (row) => row?.numero_doumento,
+      selector: (row) => row?.numero_documento,
     },
     {
       sortable: true,
