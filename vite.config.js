@@ -13,9 +13,9 @@ export default () => {
     },
     server: {
       port: 3000,
-      proxy: 'https://backend.alven-inmobiliaria.com.mx/',
+      proxy: 'http://localhost:3000',
       cors: {
-        origin: ['https://backend.alven-inmobiliaria.com.mx/', 'http://localhost:3000'],
+        origin: ['http://localhost:3000'],
         methods: ['GET', 'PATCH', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
       }

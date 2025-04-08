@@ -193,8 +193,7 @@ const TrabajadorForm = ({
               className='form-control'
               type='file'
               {...register('foto')}
-              onChange={handleFotoChange}
-              required
+              onChange={handleFotoChange}              
             />
           </div>
           <div className='my-2'>
@@ -203,8 +202,7 @@ const TrabajadorForm = ({
               className='form-control'
               type='file'
               {...register('hoja_vida')}
-              onChange={handleHojaChange}
-              required
+              onChange={handleHojaChange}              
             />
           </div>
 
