@@ -61,14 +61,31 @@ const TrabajadorForm = ({
               <label>Documento de identidad</label>
               <input
                 className='form-control'
-                type='number'
-                placeholder='Ingrese su Documento de Identidad'
+                type='text'
+                inputMode='numeric'
                 maxLength={8}
-                {...register('numero_doumento')}
+                placeholder='Ingrese su Documento de Identidad'
+                {...register('numero_documento', {
+                  required: true,
+                  maxLength: 8,
+                  pattern: /^[0-9]+$/, // solo números
+                })}
+                onInput={(e) => {
+                  // eliminar letras en tiempo real
+                  e.target.value = e.target.value.replace(/[^0-9]/g, '');
+                }}
+              />
+            </Col>
+            <Col>
+              <label>Fecha nacimiento</label>
+              <input
+                className='form-control'
+                type='date'
+                maxLength={8}
+                {...register('fecha_nac')}
                 required
               />
             </Col>
-
           </Row>
           <Row>
             <Col>
@@ -119,14 +136,20 @@ const TrabajadorForm = ({
               </select>
             </Col>
             <Col>
-              <label>Telefono</label>
+              <label>Teléfono</label>
               <input
                 className='form-control'
                 type='text'
-                placeholder='Ingrese su Telefono'
+                placeholder='Ingrese su Teléfono'
                 maxLength={9}
-                {...register('telefono')}
-                required
+                {...register('telefono', {
+                  required: true,
+                  maxLength: 9,
+                  pattern: /^[0-9]+$/, // solo números
+                })}
+                onInput={(e) => {
+                  e.target.value = e.target.value.replace(/[^0-9]/g, '');
+                }}
               />
             </Col>
           </Row>
