@@ -1,6 +1,6 @@
 import React from "react";
 import DataTable from "react-data-table-component";
-import { Edit, Trash } from "react-feather";
+import { Edit, File, Trash } from "react-feather";
 
 const ContratoTable = ({ data, actualizarContratoId, eliminarContrato }) => {
   const abrirContrato = (contrato) => {
@@ -48,7 +48,9 @@ const ContratoTable = ({ data, actualizarContratoId, eliminarContrato }) => {
       cell: (row) => {
         return (
           <>
-            <button className="btn btn-success" onClick={() => abrirContrato(row?.documento_c)}>CV</button>
+            <button className="btn btn-success" onClick={() => abrirContrato(row?.documento_c)}>
+              <File />
+            </button>
           </>
         )
       }

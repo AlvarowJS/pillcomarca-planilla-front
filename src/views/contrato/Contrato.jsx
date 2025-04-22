@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import Select from "react-select";
+import { Col, Row } from "reactstrap";
 
 const MySwal = withReactContent(Swal);
 
@@ -52,26 +53,25 @@ const Contrato = () => {
   });
 
   useEffect(() => {
-    if(dni.value){
-    bdMuni
-      .get(`${URL}?dni=${dni.value}`, getAuthheaders())
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (dni.value) {
+      bdMuni
+        .get(`${URL}?dni=${dni.value}`, getAuthheaders())
+        .then((res) => {
+          setData(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }, [refresh, dni]);
 
   useEffect(() => {
     bdMuni
       .get(URLTRABAJADOR, getAuthheaders())
-      .then((res) => {
-        console.log(res.data.data, "asdasdasd");
+      .then((res) => {        
         setDniData(res.data.data);
       })
-      .catch((err) => {});
+      .catch((err) => { });
   }, []);
 
   const crearContrato = (data) => {
@@ -205,48 +205,38 @@ const Contrato = () => {
 
   const handleChange = (selected) => {
     setDni(selected);
-    console.log(selected.value);
   };
 
   const options = dniData?.map((option) => ({
-    value: option?.numero_doumento,
-    label: option?.numero_doumento + ' ' + option.nombre + ' ' + option.apellido,
+    value: option?.numero_documento,
+    label: option?.numero_documento + ' | ' + option.nombre + ' ' + option.apellido,
   }));
   return (
     <>
       <div className="form-group mb-1">
-      <button className="btn btn-primary" onClick={toggle}>
-        + Agregar
-      </button>
+        <button className="btn btn-primary" onClick={toggle}>
+          + Agregar
+        </button>
       </div>
       <div className="form-group">
         <label className="form-group">Seleccione o ingrese un Empleado</label>
-        <Select
-          id="trabajador"
-          value={dni}
-          onChange={handleChange}
-          options={options}
-          isSearchable={true}
-          placeholder="No especifica"
-          className="form-group"
-          styles={{
-            control: (base) => ({
-              ...base,
-              width: 800, // Ajusta el ancho del Select
-              fontSize: '14px', // Ajusta el tamaño de la fuente del Select
-            }),
-            menu: (base) => ({
-              ...base,
-              width: 800, // Asegura que el menú tenga el mismo ancho que el Select
-              fontSize: '14px', // Ajusta el tamaño de la fuente del menú de opciones
-            }),
-            option: (base) => ({
-              ...base,
-              fontSize: '14px', // Ajusta el tamaño de la fuente de las opciones
-              padding: '5px',   // Ajusta el padding de las opciones
-            }),
-          }}
-        />
+        <Row>
+          <Col>
+            <Select
+              id="trabajador"
+              value={dni}
+              onChange={handleChange}
+              options={options}
+              isSearchable={true}
+              placeholder="No especifica"
+              className="form-group"
+            />
+          </Col>
+          <Col>
+
+          </Col>
+
+        </Row>
       </div>
       <ContratoForm
         toggle={toggle}
@@ -260,11 +250,11 @@ const Contrato = () => {
         setDocumento={setDocumento}
       />
       <div className="mt-4">
-      <ContratoTable
-        data={data}
-        actualizarContratoId={actualizarContratoId}
-        eliminarContrato={eliminarContrato}
-      />
+        <ContratoTable
+          data={data}
+          actualizarContratoId={actualizarContratoId}
+          eliminarContrato={eliminarContrato}
+        />
       </div>
     </>
   );

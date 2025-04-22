@@ -184,8 +184,7 @@ const TrabajadorForm = ({
                   </option>
                 ))}
               </select>
-            </Col>
-
+            </Col>                
           </Row>
           <div ckas>
             <label>Ingrese Foto del Trabajador</label>
