@@ -170,21 +170,7 @@ const TrabajadorForm = ({
                 ))}
               </select>
             </Col>
-            <Col>
-              <label>Dependencia</label>
-              <select
-                className='form-control'
-                {...register('dependencia_id')}
-                required
-              >
-                <option value="">Seleccione la Dependencia</option>
-                {dependencia && dependencia.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.nombre}
-                  </option>
-                ))}
-              </select>
-            </Col>                
+              
           </Row>
           <div ckas>
             <label>Ingrese Foto del Trabajador</label>

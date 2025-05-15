@@ -4,7 +4,7 @@ import { Edit, File, Trash } from "react-feather";
 
 const ContratoTable = ({ data, actualizarContratoId, eliminarContrato }) => {
   const abrirContrato = (contrato) => {
-    window.open(`http://127.0.0.1:8000/storage/contrato/${contrato}`,'_blank')
+    window.open(`http://127.0.0.1:8000/storage/contrato/${contrato}`, '_blank')
   }
   const columns = [
     {
@@ -35,12 +35,16 @@ const ContratoTable = ({ data, actualizarContratoId, eliminarContrato }) => {
     {
       sortable: true,
       name: "Trabajador",
-      selector: (row) => row?.trabajador.nombre,
+      selector: (row) => row?.trabajador?.nombre,
     },
     {
       sortable: true,
-      name: "Tipo de Contrato",
-      selector: (row) => row?.tipo_contrato.nombre_contrato,
+      name: (
+        <div style={{ whiteSpace: 'normal', wordBreak: 'break-word', textAlign: 'center' }}>
+          Tipo de Contrato
+        </div>
+      ),
+      selector: (row) => row?.tipo_contrato?.nombre_contrato,
     },
     {
       sortable: true,

@@ -251,9 +251,6 @@ const Trabajador = () => {
           ) ||
           (e.cargo.nombre &&
             e.cargo.nombre.toLowerCase().indexOf(search?.toLowerCase()) !== -1
-          ) ||
-          (e.dependencia.nombre &&
-            e.dependencia.nombre.toLowerCase().indexOf(search?.toLowerCase()) !== -1
           )
             
       )
