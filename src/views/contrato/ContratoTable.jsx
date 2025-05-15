@@ -9,32 +9,48 @@ const ContratoTable = ({ data, actualizarContratoId, eliminarContrato }) => {
   const columns = [
     {
       sortable: true,
-      name: "ID",
+      name:(<div style={{ whiteSpace: 'normal', wordBreak: 'break-word', textAlign: 'center' }}>
+          ID
+        </div>),
       selector: (row) => row?.id,
     },
     {
       sortable: true,
-      name: "Fecha de Inicio",
+      name:(
+      <div style={{ whiteSpace: 'normal', wordBreak: 'break-word', textAlign: 'center' }}>
+          Fecha de Inicio
+        </div>),
       selector: (row) => row?.inicio_contrato,
     },
     {
       sortable: true,
-      name: "Fin del Contrato",
+      name:(
+      <div style={{ whiteSpace: 'normal', wordBreak: 'break-word', textAlign: 'center' }}>
+          Fin del Contrato
+        </div>),
       selector: (row) => row?.fin_contrato,
     },
     {
       sortable: true,
-      name: "Terminos del Contrato",
+      name:(<div style={{ whiteSpace: 'normal', wordBreak: 'break-word', textAlign: 'center' }}>
+          Terminos del Contrato
+        </div>),
       selector: (row) => row?.terminos_contrato,
     },
     {
       sortable: true,
-      name: "Sueldo",
+      name: (<div style={{ whiteSpace: 'normal', wordBreak: 'break-word', textAlign: 'center' }}>
+          Trabajador
+        </div>),
       selector: (row) => row?.sueldo_contrato,
     },
     {
       sortable: true,
-      name: "Trabajador",
+      name: (
+        <div style={{ whiteSpace: 'normal', wordBreak: 'break-word', textAlign: 'center' }}>
+          Trabajador
+        </div>
+      ),
       selector: (row) => row?.trabajador?.nombre,
     },
     {
