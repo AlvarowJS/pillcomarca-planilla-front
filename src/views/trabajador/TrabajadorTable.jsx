@@ -15,7 +15,7 @@ const TrabajadorTable = ({ data, actualizarTrabajadorId, eliminarTrabajador, fil
     },
     {
       sortable: true,
-      name: "Numero de Documento",
+      name: "DNI",
       selector: (row) => row?.numero_documento,
     },
     {
@@ -27,11 +27,6 @@ const TrabajadorTable = ({ data, actualizarTrabajadorId, eliminarTrabajador, fil
       sortable: true,
       name: "Apellidos",
       selector: (row) => row?.apellido,
-    },
-    {
-      sortable: true,
-      name: "Dependencia",
-      selector: (row) => row?.dependencia?.nombre,
     },
     {
       sortable: true,
@@ -56,13 +51,10 @@ const TrabajadorTable = ({ data, actualizarTrabajadorId, eliminarTrabajador, fil
     },
     {
       sortable: true,
-      name: "Fecha Nacimiento",
+      name: (<div style={{ whiteSpace: 'normal', wordBreak: 'break-word', textAlign: 'center' }}>
+          Fecha Nacimiento
+        </div>),
       selector: (row) => row?.fecha_nac,
-    },
-    {
-      sortable: true,
-      name: "Documento de Identidad",
-      selector: (row) => row?.tipo_documento_identidad.nombre_tipo_doc,
     },
     {
       sortable: true,
