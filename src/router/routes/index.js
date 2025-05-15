@@ -27,8 +27,9 @@ import Universidad from "../../views/universidad/Universidad";
 import Carrera from "../../views/carrera/Carrera";
 import Practicante from "../../views/practicante/Practicante";
 import Asistencia from "../../views/asistencia/Asistencia";
-import Dependencia from "../../views/dependencia/Dependencia";
 import Cargo  from "../../views/cargo/Cargo";
+import Organo from "../../views/organo/Organo";
+import UnidadOrganica from "../../views/unidadOrganica/UnidadOrganica";
 // import OperacionesTrans from "../../views/operaciones/OperacionesTrans";
 
 const getLayout = {
@@ -119,7 +120,6 @@ const Routes = [
     path: "/",
     index: true,
     element: <Navigate replace to={DefaultRoute} />,
-
   },
   {
     path: "/trabajador",
@@ -154,7 +154,16 @@ const Routes = [
   {
     path: "/configuracion/cargo",
     element: <AuthGuard><Cargo /></AuthGuard>
-  }, 
+  },
+  {
+    path: "/configuracion/organo",
+    element: <AuthGuard><Organo /></AuthGuard>
+  },
+  {
+    path: "/configuracion/unidad-organica",
+    element: <AuthGuard><UnidadOrganica /></AuthGuard>
+  },
+
   {
     path: "/configuracion/contrato-concepto",
     element: <AuthGuard><AsigContConc /></AuthGuard>
@@ -163,10 +172,6 @@ const Routes = [
     path: "/configuracion/tipo-doc",
     element: <AuthGuard><TipoDoc /></AuthGuard>,
   }, 
-  {
-    path: "/configuracion/dependencia",
-    element: <AuthGuard><Dependencia /></AuthGuard>
-  },
   {
     path: "/configuracion/categoria",
     element: <AuthGuard><Categoria /></AuthGuard>

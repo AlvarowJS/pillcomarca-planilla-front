@@ -20,12 +20,7 @@ export default [
     icon: <Tag size={20}/>,
     navLink: "/concepto-fijo",
   },
-  {
-    id: "Dependencia",
-    title: "Dependencia",
-    icon: <Tag size={20}/>,
-    navLink: "/dependencia",
-  },
+
   {
     id: "Cargo",
     title: "Cargo",

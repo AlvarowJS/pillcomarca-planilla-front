@@ -51,11 +51,18 @@ export default [
         navLink: "/configuracion/cargo",
       },
       {
-        id: "Dependencia",
-        title: "Dependencia",
-        icon: <File size={20}/>,
-        navLink: "/configuracion/dependencia",
-      },  
+        id: "Unidad Organica",
+        title: "Unidad Organica",
+        icon: <Tag size={20}/>,
+        navLink: "/configuracion/unidad-organica",
+      },
+      {
+        id: "Organo",
+        title: "Organo",
+        icon: <Tag size={20}/>,
+        navLink: "/configuracion/organo",
+      },
+
       {
         id: "Tipodoc",
         title: "Tipo de Documento",
